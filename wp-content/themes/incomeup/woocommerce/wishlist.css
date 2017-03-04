@@ -1,0 +1,496 @@
+/**
+* Main YITH WooCommerce Wishlist CSS
+*
+* @author Your Inspiration Themes
+* @package YITH WooCommerce Wishlist
+* @version 1.1.1
+*/
+.summary .product_meta {
+    margin-top: 45px;
+}
+
+/* Popup message */
+#yith-wcwl-popup-message {
+    background: white;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    line-height: 50px;
+    padding: 15px;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    /* Thanks WP -.- */
+}
+
+/* Wishlist table template */
+.wishlist_table {
+}
+
+.wishlist_table tr td {
+    text-align: center;
+}
+
+.wishlist_table tr td.product-thumbnail, .wishlist_table tr td.product-name {
+    text-align: left;
+}
+
+.wishlist_table tr td.product-stock-status span.wishlist-in-stock {
+    color: #50a2de;
+}
+
+.wishlist_table tr td.product-stock-status span.wishlist-out-of-stock {
+    color: #F00;
+}
+
+/* Wishlist buttons */
+.summary .single_add_to_wishlist.button, div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
+    margin: 0;
+}
+
+.yith-wcwl-add-to-wishlist {
+    margin-top: 3px;
+    float: left;
+}
+
+.yith-wcwl-add-button > a i, .wishlist_table .add_to_cart.button i {
+    margin-right: 10px;
+}
+
+.wishlist_table .add_to_cart.button {
+    margin: 0;
+    padding: 9px 20px;
+    border: none;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-to-wishlist {
+    margin-top: 0;
+    float: left;
+    display: block !important;
+}
+
+/* Share buttons */
+.yith-wcwl-share ul {
+    margin-bottom: 10px;
+    line-height: 38px;
+}
+
+.yith-wcwl-share h4{
+    margin-right: 20px;
+}
+
+.yith-wcwl-share h4,
+.yith-wcwl-share ul{
+    display: inline-block;
+}
+
+.yith-wcwl-share ul, .yith-wcwl-share li {
+    height: 21px;
+}
+
+.yith-wcwl-share li, .entry-content .yith-wcwl-share li {
+    margin-left: 0;
+    margin-right: 7px;
+}
+
+.yith-wcwl-share li a {
+    background-position: left bottom;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #f5f6f8;
+    text-align: center;
+}
+
+.yith-wcwl-share li a:hover {
+    background-position: left top;
+}
+
+.yith-wcwl-share li a.facebook:before,
+.yith-wcwl-share li a.twitter:before,
+.yith-wcwl-share li a.pinterest:before,
+.yith-wcwl-share li a.googleplus:before,
+.yith-wcwl-share li a.email:before {
+    font-family:'core_icomoon';
+    color: #848994;
+    font-size: 13px;
+    position: relative;
+    top: -2px;
+    transition: all 180ms ease-in-out;
+    -webkit-transition: all 180ms ease-in-out;
+}
+
+.yith-wcwl-share li a.facebook:before{
+    content:'\f09a';
+}
+
+.yith-wcwl-share li a.twitter:before {
+    content:'\f099';
+}
+
+.yith-wcwl-share li a.pinterest:before {
+    content:'\f0d2';
+}
+
+.yith-wcwl-share li a.googleplus:before {
+    content:'\f0d5';
+}
+
+.yith-wcwl-share li a.email:before{
+    content:'\f003';
+}
+
+.yith-wcwl-share li a.facebook:hover:before{
+    color: #3B5998;
+}
+
+.yith-wcwl-share li a.twitter:hover:before{
+    color: #4099FF;
+}
+
+.yith-wcwl-share li a.pinterest:hover:before{
+    color: #c8232c;
+}
+
+.yith-wcwl-share li a.googleplus:hover:before{
+    color: #d34836;
+}
+
+.yith-wcwl-share li a.email:hover:before{
+    color: #ed1c16;
+}
+
+/* AJAX loading gif */
+.yith-wcwl-add-to-wishlist .ajax-loading {
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    display: block !important;
+    visibility: hidden;
+    width: 16px !important;
+    height: 16px !important;
+    position: absolute !important;
+    left: 45px !important;
+    top: 15px !important;
+}
+
+.add-to-wishlist-product-grid .yith-wcwl-add-button.show{
+    width: auto !important;
+}
+
+.wishlist-title {
+    margin-bottom: 30px;
+}
+
+.yith-wcwl-add-button a.add_to_wishlist,
+.yith-wcwl-wishlistaddedbrowse,
+.yith-wcwl-wishlistexistsbrowse{
+    display: block;
+    height: 48px;
+    width: auto;
+    overflow: hidden;
+    float: right;
+    position: relative;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.add-to-wishlist-product-grid .yith-wcwl-add-button a.add_to_wishlist,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistaddedbrowse,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistexistsbrowse{
+    height: auto;
+    width: auto;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    margin-left: 0;
+    float: none;
+}
+
+.add-to-wishlist-product-grid .yith-wcwl-wishlistaddedbrowse {
+  margin-bottom: 5px;
+}
+
+.yith-wcwl-add-button a.add_to_wishlist:before:hover,
+.yith-wcwl-wishlistaddedbrowse:before:hover,
+.yith-wcwl-wishlistexistsbrowse:before:hover{
+    color: #fff;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-button a.add_to_wishlist,
+.incomeup_single_wish_compare .yith-wcwl-wishlistaddedbrowse,
+.incomeup_single_wish_compare .yith-wcwl-wishlistexistsbrowse{
+    display: inline-block;
+    border: 0;
+    float: none;
+    width: 150px;
+    position: relative;
+    color: #848994;
+    line-height: 50px;
+    padding-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    -webkit-transition: all 180ms ease-in;
+    -moz-transition: all 180ms ease-in;
+    -ms-transition: all 180ms ease-in;
+    -o-transition: all 180ms ease-in;
+    transition: all 180ms ease-in;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-button a.add_to_wishlist{
+    margin-bottom: 15px !important;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-button a.add_to_wishlist:hover,
+.incomeup_single_wish_compare .yith-wcwl-wishlistaddedbrowse:hover,
+.incomeup_single_wish_compare .yith-wcwl-wishlistexistsbrowse:hover{
+    color: #50a2de;
+}
+
+.add-to-wishlist-product-grid .yith-wcwl-add-button a.add_to_wishlist:hover,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistaddedbrowse:hover,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistexistsbrowse:hover{
+    border: none;
+    color: #50a2de;
+    -webkit-transition: all 180ms ease-in;
+    -moz-transition: all 180ms ease-in;
+    -ms-transition: all 180ms ease-in;
+    -o-transition: all 180ms ease-in;
+    transition: all 180ms ease-in;
+}
+
+.yith-wcwl-add-button a.add_to_wishlist:before,
+.yith-wcwl-wishlistaddedbrowse a:before,
+.yith-wcwl-wishlistexistsbrowse a:before{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: "\f131";
+    font-family: 'core_icomoon';
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px;
+    color: #fff;
+    top: 1px;
+    position: relative;
+    -webkit-transition: all 180ms ease-in;
+    -moz-transition: all 180ms ease-in;
+    -ms-transition: all 180ms ease-in;
+    -o-transition: all 180ms ease-in;
+    transition: all 180ms ease-in;
+}
+
+.related .yith-wcwl-add-button a.add_to_wishlist:before,
+.related .yith-wcwl-wishlistaddedbrowse a:before,
+.related .yith-wcwl-wishlistexistsbrowse a:before{
+    top: 3px;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-button a.add_to_wishlist:before,
+.incomeup_single_wish_compare .yith-wcwl-wishlistaddedbrowse a:before,
+.incomeup_single_wish_compare .yith-wcwl-wishlistexistsbrowse a:before{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: "\f004";
+    font-family: 'core_icomoon';
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #50a2de !important;
+    position: absolute;
+    border-radius: 50%;
+    background: #f5f6f8;
+    background: -webkit-linear-gradient(#fff, #f5f6f8);
+    background: -o-linear-gradient(#fff, #f5f6f8);
+    background: -moz-linear-gradient(#fff, #f5f6f8);
+    background: linear-gradient(#fff, #f5f6f8);
+    border: 1px solid #e9eaec;
+    margin-right: 10px;
+    margin-top: 17px;
+    top: -12px;
+    left: 0;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-add-button a.add_to_wishlist:hover:before,
+.incomeup_single_wish_compare .yith-wcwl-wishlistaddedbrowse a:hover:before,
+.incomeup_single_wish_compare .yith-wcwl-wishlistexistsbrowse a:hover:before{
+    background: #50a2de;
+    color: #fff !important;
+}
+
+.incomeup_products_list_view .yith-wcwl-add-button a.add_to_wishlist:before,
+.incomeup_products_list_view .yith-wcwl-wishlistaddedbrowse a:before,
+.incomeup_products_list_view .yith-wcwl-wishlistexistsbrowse a:before{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: "\f004";
+    font-family: 'core_icomoon';
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #50a2de !important;
+    position: absolute;
+    border-radius: 50%;
+    background: -webkit-linear-gradient(#fff, #f5f6f8);
+    background: -o-linear-gradient(#fff, #f5f6f8);
+    background: -moz-linear-gradient(#fff, #f5f6f8);
+    background: linear-gradient(#fff, #f5f6f8);
+    border: 1px solid #e9eaec;
+    margin-right: 10px;
+    margin-top: 17px;
+    top: -13px;
+    left: 0;
+}
+
+.woocommerce ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist:before,
+.woocommerce-page ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist:before{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: "\f004"; /*icon-heart*/
+    font-family: 'core_icomoon';
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px;
+    color: #50a2de !important;
+    position: relative;
+    border-radius: 50%;
+    background: #f5f6f8;
+    background: -webkit-linear-gradient(#fff, #f5f6f8);
+    background: -o-linear-gradient(#fff, #f5f6f8);
+    background: -moz-linear-gradient(#fff, #f5f6f8);
+    background: linear-gradient(#fff, #f5f6f8);
+    border: 1px solid #e9eaec;
+    margin-right: 10px;
+    margin-top: 17px;
+}
+
+.woocommerce .products .incomeup_products_list .button.compare:before,
+.woocommerce-page .products .incomeup_products_list .button.compare:before{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: '\f0ec'; /*icon-exchange*/
+    font-family: 'core_icomoon';
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #50a2de !important;
+    position: absolute;
+    border-radius: 50%;
+    background: -webkit-linear-gradient(#fff, #f5f6f8);
+    background: -o-linear-gradient(#fff, #f5f6f8);
+    background: -moz-linear-gradient(#fff, #f5f6f8);
+    background: linear-gradient(#fff, #f5f6f8);
+    border: 1px solid #e9eaec;
+    margin-right: 10px;
+    margin-top: 17px;
+    top: -17px;
+    left: 0;
+}
+
+.woocommerce ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist,
+.woocommerce-page ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist{
+    height: 50px !important;
+}
+
+.add-to-wishlist-product-grid .yith-wcwl-add-button a.add_to_wishlist:before,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistaddedbrowse a:before,
+.add-to-wishlist-product-grid .yith-wcwl-wishlistexistsbrowse a:before{
+    height: auto;
+    width: 30px;
+    content: "\f004";
+    font-family: 'core_icomoon';
+    line-height: inherit;
+    top: 2px;
+    font-size: 12px;
+    color: #50a2de;
+    display: inline-block;
+}
+
+.yith-wcwl-wishlistaddedbrowse a:before,
+.yith-wcwl-wishlistexistsbrowse a:before,
+.yith-wcwl-add-button a.add_to_wishlist:hover:before{
+    color: #50a2de;
+    display: inline-block;
+}
+
+.yith-wcwl-wishlistaddedbrowse .feedback,
+.yith-wcwl-wishlistexistsbrowse .feedback{
+    display: none;
+}
+
+.yith-wcwl-wishlistaddedbrowse,
+.yith-wcwl-wishlistexistsbrowse{
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.yith-wcwl-wishlistaddedbrowse a,
+.yith-wcwl-wishlistexistsbrowse a{
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 1px;
+}
+
+.incomeup_single_wish_compare .yith-wcwl-wishlistaddedbrowse a,
+.incomeup_single_wish_compare .yith-wcwl-wishlistexistsbrowse a{
+    color: #848994;
+}
+
+.incomeup_products_list .yith-wcwl-wishlistaddedbrowse a,
+.incomeup_products_list .yith-wcwl-wishlistexistsbrowse a{
+    color: #848994;
+}
+
+.incomeup_products_list .yith-wcwl-wishlistaddedbrowse:hover a:before,
+.incomeup_products_list .yith-wcwl-wishlistexistsbrowse:hover a:before,
+.woocommerce ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist:hover:before,
+.woocommerce-page ul.products li.product.incomeup_products_list .cart_list_item .yith-wcwl-add-button a.add_to_wishlist:hover:before{
+    color: #fff !important;
+    background: #50a2de;
+    border: 1px solid #50a2de;
+}
+
+.related .yith-wcwl-wishlistaddedbrowse a,
+.related .yith-wcwl-wishlistexistsbrowse a{
+    color: #fff;
+}
+
+.related .yith-wcwl-wishlistaddedbrowse:hover a,
+.related .yith-wcwl-wishlistexistsbrowse:hover a,
+.yith-wcwl-wishlistaddedbrowse:hover a,
+.yith-wcwl-wishlistexistsbrowse:hover a{
+    color: #50a2de;
+}
+
+.summary.entry-summary .yith-wcwl-wishlistaddedbrowse a,
+.summary.entry-summary .yith-wcwl-wishlistexistsbrowse a{
+    margin-top: -10px;
+}
+
+.yith-wcwl-wishlistexistsbrowse a:before{
+    color: #50a2de !important;
+    transition: all 180ms ease-in;
+    -webkit-transition: all 180ms ease-in;
+}
+
+.yith-wcwl-wishlistaddedbrowse:hover a:before,
+.yith-wcwl-wishlistexistsbrowse:hover a:before{
+    color: #50a2de !important;
+}
+
