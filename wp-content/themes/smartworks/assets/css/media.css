@@ -134,14 +134,31 @@
 		margin-top: -33px;
 	}
 
+
+	/* Contact Page */
+
+	.sw-form-block h2,
+	.sw-form-block p,
+	.sw-form-block .list-inline {
+		text-align: center;
+	}
+
 }
 
 
 @media screen and (max-width: 767px)  {
-	
+
  	.container-block {
 		padding-right: 15px;
 	}
+
+  	.navbar-default .navbar-nav>li>a {
+    	margin-left: -30px;
+    }
+
+    li#menu-item-27 a {
+		margin-left: -55px !important;
+    }
 
 	.hero h1 {
 		font-size: 2.8em;
@@ -202,6 +219,16 @@
 	.footer-block-social {
 		display: block;
 		text-align: center;
+	}
+
+	/* Contact Page */
+
+	.hero-contact h1 {
+		font-size: 4.2em !important;
+	}
+
+	.hero-contact p {
+		font-size: 1em !important; 
 	}
 
 	@media screen and (max-width: 568px) {
