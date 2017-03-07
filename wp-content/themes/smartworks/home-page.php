@@ -3,7 +3,13 @@
 Template Name: Home Page
  */
 
-get_header(); ?>
+if( is_front_page() ){
+	get_header();
+} else {
+	get_header( 'sw' ); 
+}
+
+?>
 
 <section class="sw-services">
 		<div class="sw-services-box">

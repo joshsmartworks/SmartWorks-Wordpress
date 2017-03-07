@@ -798,32 +798,44 @@ footer {
  }
 
 
+/* Global Pages */
+.hero-contact,
+.hero-services {
+	background-size: cover;
+	background-position: top left;
+	background-repeat: no-repeat;
+	height: 85vh;
+	margin-top: -25px;
+	margin-bottom: 80px;
+}
+
+.hero-contact h1,
+.hero-services h1 {
+	color: #fff;
+	margin-bottom: 10px;
+	font-weight: 400;
+}
+
+.hero-contact p,
+.hero-services p {
+	color: #fff;
+	font-size: 1.4em;
+}
+
 /* ========================================================================
  * Contact Page 
  * ======================================================================== */
 
 .hero-contact {
 	background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../smartworks/assets/images/contacts/man-people.jpg');
-	background-size: cover;
-	background-position: top left;
-	background-repeat: no-repeat;
-	height: 84vh;
-	margin-top: -25px;
-	margin-bottom: 80px;
+	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+
 }
 
 .hero-contact h1 {
 	padding-top: 120px;
-	color: #fff;
 	font-size: 7.2em;
-	margin-bottom: 10px;
-	font-weight: 400;
-}        
-
-.hero-contact p {
-	color: #fff;
-	font-size: 1.4em;
-}	
+}
 
 .contact-form {
 	margin-bottom: 100px;
@@ -856,6 +868,140 @@ footer {
 	font-size: 20px;
 	padding: 25px 12px;
 }
+
+
+
+/* ========================================================================
+ * Services Page 
+ * ======================================================================== */
+
+ .hero-services {
+	background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../smartworks/assets/images/services/photo-296115.jpeg');
+	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+
+ }
+
+ .hero-services h1 {
+ 	font-size: 4em;
+ 	padding-top: 200px;
+ }	
+
+.sw-services-content {
+	margin-bottom: 50px;
+}
+
+.sw-services-content i {
+	color: #398fd8;
+}
+
+ .sw-services-content h2,
+  .sw-services-content p {
+ 	margin-bottom: 30px;
+ }
+
+ .sw-services-content h2 {
+ 	font-weight: 600;
+ }
+
+ .sw-services-content a {
+ 	margin-bottom: 80px;
+ }
+
+ .sw-services-block-inverse {
+	background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../smartworks/assets/images/services/startup-bg.jpg');
+	height: 35vh;
+	background-position: center;
+	background-size: cover;
+	margin-bottom: 100px;
+ }
+
+ .sw-services-block-inverse h2,
+ .sw-services-block-contact h2,
+ .sw-about-block-inverse h2 {
+ 	font-size: 2em;
+ 	font-weight: 600;
+ }
+
+ .sw-services-block-inverse h2,
+ .sw-about-block-inverse h2 {
+ 	color: #fff;
+ 	padding-top: 100px;
+ }
+
+ .sw-services-block-contact h2 {
+ 	margin-bottom: 30px;
+ }
+
+ .sw-services-block-contact a {
+ 	margin-bottom: 80px;
+ }
+
+
+/* ========================================================================
+ * About Page 
+ * ======================================================================== */
+
+.hero-about {
+	background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../smartworks/assets/images/about/photo-68806.jpeg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 85vh;
+	margin-top: -25px;
+	margin-bottom: 50px;
+	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+
+ }
+
+ .hero-about h1 {
+ 	padding-top: 160px;
+ 	font-size: 4.2em;
+ 	color: #f7f7f7;
+ 	font-weight: 700;
+ 	text-transform: uppercase;
+ 	line-height: 1.4em;
+ 	letter-spacing: 8px;
+ }
+
+.sw-about-content,
+.sw-about-capabilities,
+.sw-about-team {
+	margin-bottom: 80px;
+}
+ .sw-about-content h2,
+ .sw-about-capabilities h2,
+ .sw-about-team h2 {
+ 	font-size: 3.6em;
+ 	font-weight: 600;
+ 	text-transform: uppercase;
+ 	margin-bottom: 30px;
+ }
+.sw-about-block-text img {
+	margin-top: 10px;
+}
+
+ .sw-about-block-text p {
+ 	font-size: 1.2em;
+ 	line-height: 1.8em;
+ }
+
+.sw-about-capabilities h4 {
+	font-size: 1.6em;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.sw-about-capabilities ul li {
+ 	list-style: none;
+}
+
+.sw-about-block-inverse {
+	background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../smartworks/assets/images/about/pexels-photo.jpg');
+	height: 35vh;
+	background-position: center;
+	background-size: cover;
+	margin-bottom: 100px;
+ }
 
 
 

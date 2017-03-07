@@ -36,11 +36,9 @@
 
 	<header class="top-bar">
 		<nav class="navbar navbar-default navbar-default-block">
-<<<<<<< HEAD
+
 			<div class="container-fluid container-block">
-=======
-			<div class="container">
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+
 				<div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
 			        <span class="sr-only">Toggle navigation</span>
@@ -48,17 +46,14 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			      </button>
-<<<<<<< HEAD
+
 				<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/images/logo_2_trans.png" alt="SmartWorks logo"></a>
-=======
-				<a class="navbar-brand" href="#"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/images/logo_2_trans.png" alt="SmartWorks logo"></a>
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+
 			    </div>
 
 			    <?php
 			    	wp_nav_menu(array(
 			    		'theme_location'	=> 'primary',
-<<<<<<< HEAD
 			    		'depth'				=> 2,
 			    		'container'			=> 'nav',
 			    		'container_class'	=> 'navbar-collapse collapse',
@@ -66,13 +61,7 @@
 			    		'fallback_cb'		=> 'wp_bootstrap_navwalker::fallback',
 			    		'walker'			=> new wp_bootstrap_navwalker()	
 			    		));
-=======
-			    		'container'			=> 'nav',
-			    		'container_class'	=> 'navbar-collapse collapse',
-			    		'menu_class'		=> 'nav navbar-nav navbar-right'	
-			    		));
 
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			    ?>
 
 			</div><!-- /.container-fluid -->

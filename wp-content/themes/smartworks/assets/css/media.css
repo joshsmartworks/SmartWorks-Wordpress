@@ -165,39 +165,8 @@
 		margin-left: -55px !important;
     }
 
-/*=======
-	.navbar-default .navbar-toggle {
-    	border-color: transparent;
-    	margin-top: 16px;
-	}
-
-	 .navbar-collapse {
-        border-bottom: 1px solid black;
-        background-color: #f7f7f7;
-        margin-top: 10px;
-    }
-
-    .navbar-collapse ul li {
-    	font-size: inherit;
-    }
-
-    .navbar-default .navbar-nav>li>a {
-    	margin-left: -40px;
-    }
-
-    .navbar-default .navbar-nav>li>a:hover {
-		border-bottom: none;
-		color: #d51ce0;
-    }
-
-    .navbar-default .navbar-nav>li>a:last-child {
-		margin-bottom: 10px;
-	}
-
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca*/
-
 	.hero h1 {
-		font-size: 2.8em;
+		font-size: 2.8em !important;
 		color: #222;
 		letter-spacing: 2px;
 		margin-top: 40px;
@@ -287,7 +256,7 @@
 		}
 
 		.hero h1 {
-			font-size: 2em;
+			font-size: 2em !important;
 			margin-bottom: 20px;
 		}
 
