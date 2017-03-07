@@ -1,0 +1,1 @@
+[22-Feb-2017 19:47:02 UTC] PHP Catchable fatal error:  Object of class WP_Error could not be converted to string in /home/smartworksintl/public_html/wp-content/themes/incomeup/inc/breadcrumbs.php on line 87
