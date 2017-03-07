@@ -948,7 +948,7 @@ footer {
 	background-repeat: no-repeat;
 	height: 85vh;
 	margin-top: -25px;
-	margin-bottom: 50px;
+	margin-bottom: 80px;
 	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
 
  }
@@ -966,7 +966,7 @@ footer {
 .sw-about-content,
 .sw-about-capabilities,
 .sw-about-team {
-	margin-bottom: 80px;
+	margin-bottom: 100px;
 }
  .sw-about-content h2,
  .sw-about-capabilities h2,

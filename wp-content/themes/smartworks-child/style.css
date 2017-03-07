@@ -1,0 +1,17 @@
+/*
+Theme Name: Smartworks - Child Theme
+Version: 2.0.2
+Author: smartworks
+Author URI: http://www.smartworksintl.com
+Description: Fully Responsive SmartWorks Child Theme
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: blue, gray, green, orange, pink, purple, red, white, yellow, light, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, responsive-layout, custom-colors, custom-menu, full-width-template, theme-options, translation-ready
+Text Domain: smartworks
+Template: smartworks
+
+/* Theme customization starts here
+-------------------------------------------------------------- */
+
+@import url("../smartworks/style.css");
+
