@@ -54,6 +54,7 @@ function wpcf7_autop( $pee, $br = 1 ) {
 		$pee = preg_replace_callback( '/<(script|style|textarea).*?<\/\\1>/s', create_function( '$matches', 'return str_replace("\n", "<WPPreserveNewline />", $matches[0]);' ), $pee );
 		$pee = preg_replace( '|(?<!<br />)\s*\n|', "<br />\n", $pee ); // optionally make line breaks
 		$pee = str_replace( '<WPPreserveNewline />', "\n", $pee );
+<<<<<<< HEAD
 
 		/* wpcf7: remove extra <br /> just added before [response], [recaptcha], and [hidden] tags */
 		$pee = preg_replace( '!<br />\n(\[' . $block_hidden_form_tags . '[^]]*\])!',
@@ -68,6 +69,13 @@ function wpcf7_autop( $pee, $br = 1 ) {
 			'clean_pre', $pee );
 	}
 
+=======
+	}
+	$pee = preg_replace( '!(</?' . $allblocks . '[^>]*>)\s*<br />!', "$1", $pee );
+	$pee = preg_replace( '!<br />(\s*</?(?:p|li|div|dl|dd|dt|th|pre|td|ul|ol)[^>]*>)!', '$1', $pee );
+	if ( strpos( $pee, '<pre' ) !== false )
+		$pee = preg_replace_callback( '!(<pre[^>]*>)(.*?)</pre>!is', 'clean_pre', $pee );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	$pee = preg_replace( "|\n</p>$|", '</p>', $pee );
 
 	return $pee;
@@ -151,18 +159,26 @@ function wpcf7_strip_newline( $str ) {
 	return trim( $str );
 }
 
+<<<<<<< HEAD
 function wpcf7_canonicalize( $text, $strto = 'lower' ) {
+=======
+function wpcf7_canonicalize( $text ) {
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	if ( function_exists( 'mb_convert_kana' )
 	&& 'UTF-8' == get_option( 'blog_charset' ) ) {
 		$text = mb_convert_kana( $text, 'asKV', 'UTF-8' );
 	}
 
+<<<<<<< HEAD
 	if ( 'lower' == $strto ) {
 		$text = strtolower( $text );
 	} elseif ( 'upper' == $strto ) {
 		$text = strtoupper( $text );
 	}
 
+=======
+	$text = strtolower( $text );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	$text = trim( $text );
 	return $text;
 }
@@ -219,6 +235,7 @@ function wpcf7_is_date( $date ) {
 
 function wpcf7_is_mailbox_list( $mailbox_list ) {
 	if ( ! is_array( $mailbox_list ) ) {
+<<<<<<< HEAD
 		$mailbox_text = (string) $mailbox_list;
 		$mailbox_text = wp_unslash( $mailbox_text );
 
@@ -229,6 +246,9 @@ function wpcf7_is_mailbox_list( $mailbox_list ) {
 			$mailbox_text );
 
 		$mailbox_list = explode( ',', $mailbox_text );
+=======
+		$mailbox_list = explode( ',', (string) $mailbox_list );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	$addresses = array();
@@ -323,9 +343,14 @@ function wpcf7_antiscript_file_name( $filename ) {
 	$filename = basename( $filename );
 	$parts = explode( '.', $filename );
 
+<<<<<<< HEAD
 	if ( count( $parts ) < 2 ) {
 		return $filename;
 	}
+=======
+	if ( count( $parts ) < 2 )
+		return $filename;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	$script_pattern = '/^(php|phtml|pl|py|rb|cgi|asp|aspx)\d?$/i';
 
@@ -333,6 +358,7 @@ function wpcf7_antiscript_file_name( $filename ) {
 	$extension = array_pop( $parts );
 
 	foreach ( (array) $parts as $part ) {
+<<<<<<< HEAD
 		if ( preg_match( $script_pattern, $part ) ) {
 			$filename .= '.' . $part . '_';
 		} else {
@@ -345,6 +371,18 @@ function wpcf7_antiscript_file_name( $filename ) {
 	} else {
 		$filename .= '.' . $extension;
 	}
+=======
+		if ( preg_match( $script_pattern, $part ) )
+			$filename .= '.' . $part . '_';
+		else
+			$filename .= '.' . $part;
+	}
+
+	if ( preg_match( $script_pattern, $extension ) )
+		$filename .= '.' . $extension . '_.txt';
+	else
+		$filename .= '.' . $extension;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return $filename;
 }

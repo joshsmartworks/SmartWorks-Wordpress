@@ -1,0 +1,430 @@
+
+/* ========================================================================
+ * Global 
+ * ======================================================================== */
+
+html, body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	background-color: #fff;
+}
+
+
+.navbar-default .navbar-toggle {
+    border-color: rgba(221, 221, 221, 0);
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    border-color: rgba(221, 221, 221, 0);
+}
+
+.navbar-toggle:focus {
+    outline: 0;
+}
+
+/* ========================================================================
+ * Header 
+ * ======================================================================== */
+
+.navbar-default {
+	height: 80px;
+	background-color: transparent;
+	border: transparent;
+}
+
+.navbar-nav li {
+	position: relative;
+	top: 15px;
+	margin-left: 25px;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #20303c;
+	line-height: 1.4em;
+	font-size: .9em;
+	text-transform: uppercase;
+	transition: all .2s;
+}
+
+
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: #222;
+	padding-bottom: 5px;
+	border-bottom: 4px solid #398fd8;
+}
+
+.navbar-brand img {
+	width: 220px;
+}
+
+.top-bar {
+	background-image: url('../images/pexels-photo-7778.jpg');
+	background-size: cover;
+	background-position: top left;
+	background-repeat: no-repeat;
+	height: 100vh;
+	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+}
+
+
+.hero h1 {
+	font-size: 3.3em;
+	color: #222;
+	letter-spacing: 2px;
+	margin-top: 100px;
+	margin-bottom: 10px;
+}
+
+.hero p {
+	font-size: 1.1em;
+	font-weight: 300;
+	color: #222;
+	margin-bottom: 40px;
+}
+
+.button {
+	border: 1px solid #222;
+}
+
+.button-start {
+	border-radius: 20px;
+	padding: 6px 40px;
+
+}
+
+.button-request {
+	margin-top: 3px;
+	background-color: transparent;
+	border: 1px solid #398fd8;
+	padding: 10px 40px;
+    text-transform: uppercase;
+    font-size: .9em;
+    transition: all .2s ease;
+}
+
+.button-request:hover {
+	background-color: #d51ce0;
+	border-color: #d51ce0;
+	color: #fff;
+}
+
+.hero a {
+	color: #fff;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	text-decoration: none;
+	background-color: #dc38e6;
+	border-color: #dc38e6;
+	transition: all .2s ease;
+	text-transform: uppercase;
+}
+
+.hero a:hover {
+	background-color: #d51ce0;
+	border-color: #d51ce0;
+}
+
+.sw-wrapper-box {
+	background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/pexels-photo.jpg');
+	background-size: cover;
+	background-position: center top;
+	height: 100vh;
+	margin-top: -20px;
+	
+}
+
+/* ========================================================================
+ * Section - Services 
+ * ======================================================================== */
+
+.sw-services-box {
+	padding-top: 100px;
+}
+
+.sw-services-box h2 {
+	font-weight: 600;
+	font-size: 2.8em;
+}
+
+.sw-services-box p {
+	font-size: .9em;
+	margin-bottom: 20px;
+}
+
+.sw-services-box a {
+	text-decoration: none;
+}
+
+.button-learn {
+	padding: 8px 30px;
+	border-radius: 20px;
+}
+
+.services-development img {
+	width: 550px;
+}
+
+.services-design {
+	margin-top: 150px;
+}
+
+.services-marketing {
+	margin-top: 100px;
+	height: 65vh;
+	background: #02AAB0; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #02AAB0 , #00CDAC); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #02AAB0 , #00CDAC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	margin-bottom: 100px;
+}
+
+.services-marketing h2,
+.services-marketing h4,
+.services-marketing p  {
+	color: #fff;
+}
+
+.services-marketing h2 {
+	padding-top: 20px;
+}
+
+.services-marketing p {
+	margin-bottom: 50px;
+}
+
+.button-market {
+	padding: 10px 40px;
+	border-radius: 20px;
+	border: 1px solid #fff;
+	color: #314755;
+	font-weight: 600;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	background-color: #fff;
+}
+
+.services-marketing img {
+	padding-top: 50px;
+	width: 300px;
+}
+
+/* ========================================================================
+ * Section - Portfolio 
+ * ======================================================================== */
+
+.portfolio {
+	margin-bottom: 100px;
+}
+
+.portfolio::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.portfolio h2 {
+ 	font-weight: 600;
+	font-size: 2.8em;
+ }
+
+ .portfolio p {
+ 	margin-bottom: 50px;
+ }
+
+.owl-carousel {
+	min-height: 20rem;
+    float: left;
+    background-color: black;
+    padding: 5px 5px;
+}
+
+.owl-carousel .item {
+	width: 844px;
+}
+
+.thumbnail-caption {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.thumbnail-caption img {
+	width: 96%;
+	margin: 0 auto;
+}
+
+.owl-theme .owl-dots {
+	display: none;
+}
+.owl-nav {
+	position: relative;
+}
+
+.owl-prev {
+	position: absolute;
+	left: 10px;
+	top: -220px;
+}
+.owl-next {
+	position: absolute;
+	right: 10px;
+	top: -220px;
+}
+
+
+.owl-theme .owl-nav [class*=owl-] {
+    color: #FFF;
+    font-size: 35px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: black;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+/* ========================================================================
+ * Section - Customers 
+ * ======================================================================== */
+
+.customers h2 {
+	font-size: 2.8em;
+	font-weight: 600;
+}
+
+.customers img {
+	width: 70%;
+	margin: 0 auto;
+}
+
+/* ========================================================================
+ * Section - Contacts 
+ * ======================================================================== */
+.contacts {
+	margin-top: 100px;
+	background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../images/startup-photos-7356.jpg);
+	opacity: 0.8;
+	background-size: cover;
+	background-position: center bottom;
+	min-height: 180px;
+}
+
+.contacts h2 {
+	padding-top: 20px;
+	color: #fff;
+	font-size: 1.8em;
+	font-weight: 600;
+	margin-bottom: 40px;
+}
+
+.button-hire {
+	padding: 10px 30px;
+	color: #fff;
+	border: 1px solid #fff;
+	transition: all .2s ease;
+}
+
+.button-hire:hover {
+	background-color: #fff;
+	color: #398fd8;
+	text-decoration: none;
+
+}
+
+
+/* ========================================================================
+ * Footer
+ * ======================================================================== */
+
+footer {
+	background-color: #2a2f33;
+	color: #fff;
+	padding-top: 30px;
+}
+
+.sw-footer-box img {
+	width: 220px;
+	margin-bottom: 20px;
+}
+
+.sw-footer-box p,
+.sw-footer-box li a {
+	font-size: .8em;
+	padding-right: 15px;
+	color: #a2adb5;
+}
+
+.sw-footer-box a {
+	color: #fff;
+}
+
+.sw-footer-box ul li {
+	list-style: none;
+}
+
+.sw-footer-box i {
+	padding-right: 10px;
+}
+
+.sw-footer-row-1,
+.sw-footer-box-two {
+	margin-bottom: 40px;
+
+}
+
+.sw-footer-box-two ul li {
+	list-style: none;
+}
+
+.sw-footer-box-two h4 {
+	padding-left: 40px;
+}
+
+.sw-footer-box-two li p {
+	font-size: .8em;
+	color: #a2adb5;
+}
+
+.footer-block {
+	background-color: #1b1e20;
+}
+
+.footer-block-row {
+	padding-top: 20px;
+}
+
+.footer-block-row p {
+	font-size: .9em;
+	color: #a2adb5;
+}
+
+
+.footer-block-social i {
+	color: #fff;
+}
+
+/* ========================================================================
+ * Modal 
+ * ======================================================================== */
+ 
+.modal-header h4 {
+	font-size: 1.2em;
+	font-weight: 600;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
+.modal-body p {
+ 	font-size: .9em;
+ 	margin-bottom: 20px;
+ 	font-weight: 600;
+ }
+
+ .modal-body form input {
+ 	margin-top: 13px;
+ }
+
+
+
+        

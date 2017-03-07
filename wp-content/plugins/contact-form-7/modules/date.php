@@ -10,7 +10,11 @@ add_action( 'wpcf7_init', 'wpcf7_add_form_tag_date' );
 
 function wpcf7_add_form_tag_date() {
 	wpcf7_add_form_tag( array( 'date', 'date*' ),
+<<<<<<< HEAD
 		'wpcf7_date_form_tag_handler', array( 'name-attr' => true ) );
+=======
+		'wpcf7_date_form_tag_handler', true );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_date_form_tag_handler( $tag ) {
@@ -150,7 +154,11 @@ function wpcf7_tag_generator_date( $contact_form, $args = '' ) {
 
 	$description = __( "Generate a form-tag for a date input field. For more details, see %s.", 'contact-form-7' );
 
+<<<<<<< HEAD
 	$desc_link = wpcf7_link( __( 'https://contactform7.com/date-field/', 'contact-form-7' ), __( 'Date Field', 'contact-form-7' ) );
+=======
+	$desc_link = wpcf7_link( __( 'http://contactform7.com/date-field/', 'contact-form-7' ), __( 'Date Field', 'contact-form-7' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 ?>
 <div class="control-box">

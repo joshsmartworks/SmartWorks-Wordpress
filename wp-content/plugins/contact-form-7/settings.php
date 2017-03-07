@@ -10,13 +10,19 @@ require_once WPCF7_PLUGIN_DIR . '/includes/shortcodes.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/capabilities.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/contact-form-template.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/contact-form.php';
+<<<<<<< HEAD
 require_once WPCF7_PLUGIN_DIR . '/includes/contact-form-functions.php';
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 require_once WPCF7_PLUGIN_DIR . '/includes/mail.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/submission.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/upgrade.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/integration.php';
 require_once WPCF7_PLUGIN_DIR . '/includes/config-validator.php';
+<<<<<<< HEAD
 require_once WPCF7_PLUGIN_DIR . '/includes/rest-api.php';
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 if ( is_admin() ) {
 	require_once WPCF7_PLUGIN_DIR . '/admin/admin.php';
@@ -44,7 +50,11 @@ class WPCF7 {
 		self::load_module( 'submit' );
 		self::load_module( 'text' );
 		self::load_module( 'textarea' );
+<<<<<<< HEAD
 		self::load_module( 'hidden' );
+=======
+		self::load_module( 'hidden' );		
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	protected static function load_module( $mod ) {
@@ -135,6 +145,7 @@ function wpcf7_install() {
 		return;
 	}
 
+<<<<<<< HEAD
 	$contact_form = WPCF7_ContactForm::get_template(
 		array(
 			'title' => sprintf( __( 'Contact form %d', 'contact-form-7' ), 1 ),
@@ -151,4 +162,16 @@ function wpcf7_install() {
 			'count_invalid' => 0,
 		)
 	);
+=======
+	$contact_form = WPCF7_ContactForm::get_template( array(
+		'title' => sprintf( __( 'Contact form %d', 'contact-form-7' ), 1 ) ) );
+
+	$contact_form->save();
+
+	WPCF7::update_option( 'bulk_validate', array(
+		'timestamp' => current_time( 'timestamp' ),
+		'version' => WPCF7_VERSION,
+		'count_valid' => 1,
+		'count_invalid' => 0 ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }

@@ -44,7 +44,11 @@ function smartworks_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
+<<<<<<< HEAD
 		'primary' => esc_html__( 'Primary Menu', 'smartworks' ),
+=======
+		'menu-1' => esc_html__( 'Primary', 'smartworks' ),
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	) );
 
 	/*
@@ -141,6 +145,7 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+<<<<<<< HEAD
 
 // Register Custom Navigation Walker
 require_once('wp_bootstrap_navwalker.php');
@@ -157,3 +162,5 @@ function my_menu_atts( $atts, $item, $args )
 	}
 	return $atts;
 }
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca

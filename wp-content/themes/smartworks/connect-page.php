@@ -3,6 +3,7 @@
 Template Name: Connect Page
  */
 
+<<<<<<< HEAD
 if( is_front_page() ){
 	get_header();
 } else {
@@ -52,3 +53,11 @@ if( is_front_page() ){
 
 get_footer( 'sw' );
 
+=======
+get_header(); ?>
+
+
+
+<?php
+get_footer();
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca

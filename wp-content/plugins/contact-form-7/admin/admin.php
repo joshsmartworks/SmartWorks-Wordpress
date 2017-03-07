@@ -59,9 +59,14 @@ function wpcf7_set_screen_options( $result, $option, $value ) {
 	$wpcf7_screens = array(
 		'cfseven_contact_forms_per_page' );
 
+<<<<<<< HEAD
 	if ( in_array( $option, $wpcf7_screens ) ) {
 		$result = $value;
 	}
+=======
+	if ( in_array( $option, $wpcf7_screens ) )
+		$result = $value;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return $result;
 }
@@ -72,6 +77,7 @@ function wpcf7_load_contact_form_admin() {
 	$action = wpcf7_current_action();
 
 	if ( 'save' == $action ) {
+<<<<<<< HEAD
 		$id = isset( $_POST['post_ID'] ) ? $_POST['post_ID'] : '-1';
 		check_admin_referer( 'wpcf7-save-contact-form_' . $id );
 
@@ -126,6 +132,20 @@ function wpcf7_load_contact_form_admin() {
 		} else {
 			$query['message'] = 'saved';
 		}
+=======
+		$id = $_POST['post_ID'];
+		check_admin_referer( 'wpcf7-save-contact-form_' . $id );
+
+		if ( ! current_user_can( 'wpcf7_edit_contact_form', $id ) )
+			wp_die( __( 'You are not allowed to edit this item.', 'contact-form-7' ) );
+
+		$id = wpcf7_save_contact_form( $id );
+
+		$query = array(
+			'message' => ( -1 == $_POST['post_ID'] ) ? 'created' : 'saved',
+			'post' => $id,
+			'active-tab' => isset( $_POST['active-tab'] ) ? (int) $_POST['active-tab'] : 0 );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$redirect_to = add_query_arg( $query, menu_page_url( 'wpcf7', false ) );
 		wp_safe_redirect( $redirect_to );
@@ -139,9 +159,14 @@ function wpcf7_load_contact_form_admin() {
 
 		check_admin_referer( 'wpcf7-copy-contact-form_' . $id );
 
+<<<<<<< HEAD
 		if ( ! current_user_can( 'wpcf7_edit_contact_form', $id ) ) {
 			wp_die( __( 'You are not allowed to edit this item.', 'contact-form-7' ) );
 		}
+=======
+		if ( ! current_user_can( 'wpcf7_edit_contact_form', $id ) )
+			wp_die( __( 'You are not allowed to edit this item.', 'contact-form-7' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$query = array();
 
@@ -160,6 +185,7 @@ function wpcf7_load_contact_form_admin() {
 	}
 
 	if ( 'delete' == $action ) {
+<<<<<<< HEAD
 		if ( ! empty( $_POST['post_ID'] ) ) {
 			check_admin_referer( 'wpcf7-delete-contact-form_' . $_POST['post_ID'] );
 		} elseif ( ! is_array( $_REQUEST['post'] ) ) {
@@ -167,6 +193,14 @@ function wpcf7_load_contact_form_admin() {
 		} else {
 			check_admin_referer( 'bulk-posts' );
 		}
+=======
+		if ( ! empty( $_POST['post_ID'] ) )
+			check_admin_referer( 'wpcf7-delete-contact-form_' . $_POST['post_ID'] );
+		elseif ( ! is_array( $_REQUEST['post'] ) )
+			check_admin_referer( 'wpcf7-delete-contact-form_' . $_REQUEST['post'] );
+		else
+			check_admin_referer( 'bulk-posts' );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$posts = empty( $_POST['post_ID'] )
 			? (array) $_REQUEST['post']
@@ -177,6 +211,7 @@ function wpcf7_load_contact_form_admin() {
 		foreach ( $posts as $post ) {
 			$post = WPCF7_ContactForm::get_instance( $post );
 
+<<<<<<< HEAD
 			if ( empty( $post ) ) {
 				continue;
 			}
@@ -188,15 +223,30 @@ function wpcf7_load_contact_form_admin() {
 			if ( ! $post->delete() ) {
 				wp_die( __( 'Error in deleting.', 'contact-form-7' ) );
 			}
+=======
+			if ( empty( $post ) )
+				continue;
+
+			if ( ! current_user_can( 'wpcf7_delete_contact_form', $post->id() ) )
+				wp_die( __( 'You are not allowed to delete this item.', 'contact-form-7' ) );
+
+			if ( ! $post->delete() )
+				wp_die( __( 'Error in deleting.', 'contact-form-7' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 			$deleted += 1;
 		}
 
 		$query = array();
 
+<<<<<<< HEAD
 		if ( ! empty( $deleted ) ) {
 			$query['message'] = 'deleted';
 		}
+=======
+		if ( ! empty( $deleted ) )
+			$query['message'] = 'deleted';
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$redirect_to = add_query_arg( $query, menu_page_url( 'wpcf7', false ) );
 
@@ -213,18 +263,28 @@ function wpcf7_load_contact_form_admin() {
 			}
 
 			$contact_forms = WPCF7_ContactForm::find();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			$result = array(
 				'timestamp' => current_time( 'timestamp' ),
 				'version' => WPCF7_VERSION,
 				'count_valid' => 0,
+<<<<<<< HEAD
 				'count_invalid' => 0,
 			);
+=======
+				'count_invalid' => 0 );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 			foreach ( $contact_forms as $contact_form ) {
 				$config_validator = new WPCF7_ConfigValidator( $contact_form );
 				$config_validator->validate();
+<<<<<<< HEAD
 				$config_validator->save();
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 				if ( $config_validator->is_valid() ) {
 					$result['count_valid'] += 1;
@@ -300,16 +360,20 @@ function wpcf7_admin_enqueue_scripts( $hook_suffix ) {
 		WPCF7_VERSION, true );
 
 	$args = array(
+<<<<<<< HEAD
 		'apiSettings' => array(
 			'root' => esc_url_raw( get_rest_url() ),
 			'nonce' => ( wp_installing() && ! is_multisite() )
 				? '' : wp_create_nonce( 'wp_rest' ) ),
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		'pluginUrl' => wpcf7_plugin_url(),
 		'saveAlert' => __(
 			"The changes you made will be lost if you navigate away from this page.",
 			'contact-form-7' ),
 		'activeTab' => isset( $_GET['active-tab'] )
 			? (int) $_GET['active-tab'] : 0,
+<<<<<<< HEAD
 		'configValidator' => array(
 			'errors' => array(),
 			'howToCorrect' => __( "How to correct this?", 'contact-form-7' ),
@@ -320,14 +384,32 @@ function wpcf7_admin_enqueue_scripts( $hook_suffix ) {
 			'docUrl' => WPCF7_ConfigValidator::get_doc_link(),
 		),
 	);
+=======
+		'howToCorrectLink' => __( "How to correct this?", 'contact-form-7' ),
+		'configErrors' => array() );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( ( $post = wpcf7_get_current_contact_form() )
 	&& current_user_can( 'wpcf7_edit_contact_form', $post->id() )
 	&& wpcf7_validate_configuration() ) {
 		$config_validator = new WPCF7_ConfigValidator( $post );
+<<<<<<< HEAD
 		$config_validator->restore();
 		$args['configValidator']['errors'] =
 			$config_validator->collect_error_messages();
+=======
+		$error_messages = $config_validator->collect_error_messages();
+
+		foreach ( $error_messages as $section => $errors ) {
+			$args['configErrors'][$section] = array();
+
+			foreach ( $errors as $error ) {
+				$args['configErrors'][$section][] = array(
+					'message' => esc_html( $error['message'] ),
+					'link' => esc_url( $error['link'] ) );
+			}
+		}
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	wp_localize_script( 'wpcf7-admin', '_wpcf7', $args );
@@ -411,7 +493,11 @@ function wpcf7_admin_bulk_validate_page() {
 	<p><input type="submit" class="button" value="<?php echo esc_attr( $submit_text ); ?>" /></p>
 </form>
 
+<<<<<<< HEAD
 <?php echo wpcf7_link( __( 'https://contactform7.com/configuration-validator-faq/', 'contact-form-7' ), __( 'FAQ about Configuration Validator', 'contact-form-7' ) ); ?>
+=======
+<?php echo wpcf7_link( __( 'http://contactform7.com/configuration-validator-faq/', 'contact-form-7' ), __( 'FAQ about Configuration Validator', 'contact-form-7' ) ); ?>
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 </div>
 <?php
@@ -487,6 +573,7 @@ function wpcf7_admin_updated_message() {
 	}
 
 	if ( ! empty( $updated_message ) ) {
+<<<<<<< HEAD
 		echo sprintf( '<div id="message" class="notice notice-success is-dismissible"><p>%s</p></div>', esc_html( $updated_message ) );
 		return;
 	}
@@ -496,6 +583,9 @@ function wpcf7_admin_updated_message() {
 			'contact-form-7' );
 
 		echo sprintf( '<div id="message" class="notice notice-error is-dismissible"><p>%s</p></div>', esc_html( $updated_message ) );
+=======
+		echo sprintf( '<div id="message" class="updated notice notice-success is-dismissible"><p>%s</p></div>', esc_html( $updated_message ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		return;
 	}
 
@@ -526,9 +616,14 @@ function wpcf7_admin_updated_message() {
 add_filter( 'plugin_action_links', 'wpcf7_plugin_action_links', 10, 2 );
 
 function wpcf7_plugin_action_links( $links, $file ) {
+<<<<<<< HEAD
 	if ( $file != WPCF7_PLUGIN_BASENAME ) {
 		return $links;
 	}
+=======
+	if ( $file != WPCF7_PLUGIN_BASENAME )
+		return $links;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	$settings_link = '<a href="' . menu_page_url( 'wpcf7', false ) . '">'
 		. esc_html( __( 'Settings', 'contact-form-7' ) ) . '</a>';
@@ -575,6 +670,43 @@ function wpcf7_not_allowed_to_edit() {
 		esc_html( $message ) );
 }
 
+<<<<<<< HEAD
+=======
+add_action( 'wpcf7_admin_misc_pub_section', 'wpcf7_notice_config_errors' );
+
+function wpcf7_notice_config_errors() {
+	if ( ! $contact_form = wpcf7_get_current_contact_form() ) {
+		return;
+	}
+
+	if ( ! wpcf7_validate_configuration()
+	|| ! current_user_can( 'wpcf7_edit_contact_form', $contact_form->id() ) ) {
+		return;
+	}
+
+	$config_validator = new WPCF7_ConfigValidator( $contact_form );
+
+	if ( $count_errors = $config_validator->count_errors() ) {
+		$message = sprintf(
+			_n(
+				'%s configuration error found',
+				'%s configuration errors found',
+				$count_errors, 'contact-form-7' ),
+			number_format_i18n( $count_errors ) );
+
+		$link = wpcf7_link(
+			__( 'http://contactform7.com/configuration-validator-faq/',
+				'contact-form-7' ),
+			__( "What's this?", 'contact-form-7' ),
+			array( 'class' => 'external' ) );
+
+		echo sprintf(
+			'<div class="misc-pub-section warning">%1$s<br />%2$s</div>',
+			$message, $link );
+	}
+}
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 add_action( 'wpcf7_admin_warnings', 'wpcf7_notice_bulk_validate_config', 5 );
 
 function wpcf7_notice_bulk_validate_config() {

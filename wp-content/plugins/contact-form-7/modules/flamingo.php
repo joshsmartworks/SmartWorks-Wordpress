@@ -66,7 +66,11 @@ function wpcf7_flamingo_submit( $contactform, $result ) {
 	$akismet = isset( $submission->akismet ) ? (array) $submission->akismet : null;
 
 	if ( 'mail_sent' == $result['status'] ) {
+<<<<<<< HEAD
 		$flamingo_contact = Flamingo_Contact::add( array(
+=======
+		Flamingo_Contact::add( array(
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			'email' => $email,
 			'name' => $name ) );
 	}
@@ -98,6 +102,7 @@ function wpcf7_flamingo_submit( $contactform, $result ) {
 		'akismet' => $akismet,
 		'spam' => ( 'spam' == $result['status'] ) );
 
+<<<<<<< HEAD
 	$flamingo_inbound = Flamingo_Inbound_Message::add( $args );
 
 	$result += array(
@@ -107,6 +112,9 @@ function wpcf7_flamingo_submit( $contactform, $result ) {
 			empty( $flamingo_inbound ) ? 0 : absint( $flamingo_inbound->id ) );
 
 	do_action( 'wpcf7_after_flamingo', $result );
+=======
+	Flamingo_Inbound_Message::add( $args );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_flamingo_get_value( $field, $contactform ) {

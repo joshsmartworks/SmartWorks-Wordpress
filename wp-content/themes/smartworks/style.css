@@ -377,6 +377,10 @@ html, body {
 	background-color: #fff;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 .navbar-default .navbar-toggle {
     border-color: rgba(221, 221, 221, 0);
 }
@@ -405,6 +409,7 @@ html, body {
 	margin-left: 25px;
 }
 
+<<<<<<< HEAD
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     color: #222;
     background-color: transparent;
@@ -426,6 +431,8 @@ li#menu-item-27 a:hover {
 	color: #fff;
 }
 
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 .navbar-default .navbar-nav>li>a {
 	color: #20303c;
 	line-height: 1.4em;
@@ -434,6 +441,11 @@ li#menu-item-27 a:hover {
 	transition: all .2s;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 .navbar-default .navbar-nav>li>a:hover {
 	color: #222;
 	padding-bottom: 5px;
@@ -479,6 +491,25 @@ li#menu-item-27 a:hover {
 
 }
 
+<<<<<<< HEAD
+=======
+.button-request {
+	margin-top: 3px;
+	background-color: transparent;
+	border: 1px solid #398fd8;
+	padding: 10px 40px;
+    text-transform: uppercase;
+    font-size: .9em;
+    transition: all .2s ease;
+}
+
+.button-request:hover {
+	background-color: #d51ce0;
+	border-color: #d51ce0;
+	color: #fff;
+}
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 .hero a {
 	color: #fff;
 	font-size: 1.2em;
@@ -795,6 +826,7 @@ footer {
  	margin-top: 13px;
  }
 
+<<<<<<< HEAD
 /* ========================================================================
  * Contact Page 
  * ======================================================================== */
@@ -854,4 +886,9 @@ footer {
 	padding: 25px 12px;
 }
 
+=======
+
+
+        
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 

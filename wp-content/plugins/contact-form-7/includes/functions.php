@@ -31,9 +31,14 @@ function wpcf7_upload_dir( $type = false ) {
 }
 
 function wpcf7_verify_nonce( $nonce, $action = -1 ) {
+<<<<<<< HEAD
 	if ( substr( wp_hash( $action, 'nonce' ), -12, 10 ) == $nonce ) {
 		return true;
 	}
+=======
+	if ( substr( wp_hash( $action, 'nonce' ), -12, 10 ) == $nonce )
+		return true;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return false;
 }
@@ -69,6 +74,7 @@ function wpcf7_blacklist_check( $target ) {
 }
 
 function wpcf7_array_flatten( $input ) {
+<<<<<<< HEAD
 	if ( ! is_array( $input ) ) {
 		return array( $input );
 	}
@@ -78,6 +84,15 @@ function wpcf7_array_flatten( $input ) {
 	foreach ( $input as $value ) {
 		$output = array_merge( $output, wpcf7_array_flatten( $value ) );
 	}
+=======
+	if ( ! is_array( $input ) )
+		return array( $input );
+
+	$output = array();
+
+	foreach ( $input as $value )
+		$output = array_merge( $output, wpcf7_array_flatten( $value ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return $output;
 }
@@ -86,9 +101,14 @@ function wpcf7_flat_join( $input ) {
 	$input = wpcf7_array_flatten( $input );
 	$output = array();
 
+<<<<<<< HEAD
 	foreach ( (array) $input as $value ) {
 		$output[] = trim( (string) $value );
 	}
+=======
+	foreach ( (array) $input as $value )
+		$output[] = trim( (string) $value );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return implode( ', ', $output );
 }
@@ -154,8 +174,12 @@ function wpcf7_format_atts( $atts ) {
 function wpcf7_link( $url, $anchor_text, $args = '' ) {
 	$defaults = array(
 		'id' => '',
+<<<<<<< HEAD
 		'class' => '',
 	);
+=======
+		'class' => '' );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	$args = wp_parse_args( $args, $defaults );
 	$args = array_intersect_key( $args, $defaults );
@@ -233,8 +257,12 @@ function wpcf7_enctype_value( $enctype ) {
 	$valid_enctypes = array(
 		'application/x-www-form-urlencoded',
 		'multipart/form-data',
+<<<<<<< HEAD
 		'text/plain',
 	);
+=======
+		'text/plain' );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( in_array( $enctype, $valid_enctypes ) ) {
 		return $enctype;

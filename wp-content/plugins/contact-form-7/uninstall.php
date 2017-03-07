@@ -9,6 +9,7 @@ function wpcf7_delete_plugin() {
 
 	delete_option( 'wpcf7' );
 
+<<<<<<< HEAD
 	$posts = get_posts(
 		array(
 			'numberposts' => -1,
@@ -16,6 +17,12 @@ function wpcf7_delete_plugin() {
 			'post_status' => 'any',
 		)
 	);
+=======
+	$posts = get_posts( array(
+		'numberposts' => -1,
+		'post_type' => 'wpcf7_contact_form',
+		'post_status' => 'any' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	foreach ( $posts as $post ) {
 		wp_delete_post( $post->ID, true );

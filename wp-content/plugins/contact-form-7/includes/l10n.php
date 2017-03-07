@@ -15,8 +15,12 @@ function wpcf7_l10n() {
 
 	$api = translations_api( 'plugins', array(
 		'slug' => 'contact-form-7',
+<<<<<<< HEAD
 		'version' => WPCF7_VERSION,
 	) );
+=======
+		'version' => WPCF7_VERSION ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( is_wp_error( $api ) || empty( $api['translations'] ) ) {
 		return $l10n;
@@ -46,8 +50,12 @@ function wpcf7_is_rtl( $locale = '' ) {
 		'haz' => 'Hazaragi',
 		'he_IL' => 'Hebrew',
 		'ps' => 'Pashto',
+<<<<<<< HEAD
 		'ug_CN' => 'Uighur',
 	);
+=======
+		'ug_CN' => 'Uighur' );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( empty( $locale ) && function_exists( 'is_rtl' ) ) {
 		return is_rtl();

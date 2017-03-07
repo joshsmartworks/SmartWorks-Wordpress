@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+#misc-publishing-actions .misc-pub-section::before {
+	right: -1px;
+	padding: 0 0 0 2px;
+}
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 /*
  * Tabs
  */
@@ -5,10 +13,13 @@
 	padding: 9px 10px 0 15px;
 }
 
+<<<<<<< HEAD
 #contact-form-editor-tabs li a span.dashicons {
 	padding: 6px 4px 4px 0;
 }
 
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 /*
  * Form Tab
  */

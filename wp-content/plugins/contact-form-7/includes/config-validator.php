@@ -4,6 +4,7 @@ class WPCF7_ConfigValidator {
 
 	const error = 100;
 	const error_maybe_empty = 101;
+<<<<<<< HEAD
 	const error_invalid_mailbox_syntax = 102;
 	const error_email_not_in_site_domain = 103;
 	const error_html_in_message = 104;
@@ -24,12 +25,43 @@ class WPCF7_ConfigValidator {
 
 		return esc_url( $url );
 	}
+=======
+	const error_invalid_syntax = 102;
+	const error_email_not_in_site_domain = 103;
+	const error_html_in_message = 104;
+	const error_multiple_controls_in_label = 105;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	private $contact_form;
 	private $errors = array();
 
 	public function __construct( WPCF7_ContactForm $contact_form ) {
 		$this->contact_form = $contact_form;
+<<<<<<< HEAD
+=======
+
+		$config_errors = get_post_meta( $contact_form->id(),
+			'_config_errors', true );
+
+		foreach ( (array) $config_errors as $section => $errors ) {
+			if ( empty( $errors ) ) {
+				continue;
+			}
+
+			if ( ! is_array( $errors ) ) { // for back-compat
+				$code = $errors;
+				$this->add_error( $section, $code );
+			} else {
+				foreach ( (array) $errors as $error ) {
+					if ( ! empty( $error['code'] ) ) {
+						$code = $error['code'];
+						$args = isset( $error['args'] ) ? $error['args'] : '';
+						$this->add_error( $section, $code, $args );
+					}
+				}
+			}
+		}
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	public function contact_form() {
@@ -40,6 +72,7 @@ class WPCF7_ConfigValidator {
 		return ! $this->count_errors();
 	}
 
+<<<<<<< HEAD
 	public function count_errors( $args = '' ) {
 		$args = wp_parse_args( $args, array(
 			'section' => '',
@@ -70,6 +103,13 @@ class WPCF7_ConfigValidator {
 
 				$count += 1;
 			}
+=======
+	public function count_errors() {
+		$count = 0;
+
+		foreach( $this->errors as $errors ) {
+			$count += count( array_filter( $errors ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		}
 
 		return $count;
@@ -99,8 +139,13 @@ class WPCF7_ConfigValidator {
 				}
 
 				$error_messages[$section][] = array(
+<<<<<<< HEAD
 					'message' => esc_html( $message ),
 					'link' => esc_url( $link ) );
+=======
+					'message' => $message,
+					'link' => $link );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			}
 		}
 
@@ -128,6 +173,7 @@ class WPCF7_ConfigValidator {
 	public function get_default_message( $code ) {
 		switch ( $code ) {
 			case self::error_maybe_empty:
+<<<<<<< HEAD
 				return __( "There is a possible empty field.", 'contact-form-7' );
 			case self::error_invalid_mailbox_syntax:
 				return __( "Invalid mailbox syntax is used.", 'contact-form-7' );
@@ -139,6 +185,17 @@ class WPCF7_ConfigValidator {
 				return __( "Multiple form controls are in a single label element.", 'contact-form-7' );
 			case self::error_invalid_mail_header:
 				return __( "There are invalid mail header fields.", 'contact-form-7' );
+=======
+				return __( "This field can be empty depending on user input.", 'contact-form-7' );
+			case self::error_invalid_syntax:
+				return __( "This field has syntax errors.", 'contact-form-7' );
+			case self::error_email_not_in_site_domain:
+				return __( "This email address does not belong to the same domain as the site.", 'contact-form-7' );
+			case self::error_html_in_message:
+				return __( "HTML tags are not allowed in a message.", 'contact-form-7' );
+			case self::error_multiple_controls_in_label:
+				return __( "Multiple form controls are placed inside a single label element.", 'contact-form-7' );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			default:
 				return '';
 		}
@@ -147,16 +204,23 @@ class WPCF7_ConfigValidator {
 	public function add_error( $section, $code, $args = '' ) {
 		$args = wp_parse_args( $args, array(
 			'message' => '',
+<<<<<<< HEAD
 			'params' => array(),
 		) );
+=======
+			'params' => array() ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( ! isset( $this->errors[$section] ) ) {
 			$this->errors[$section] = array();
 		}
 
 		$this->errors[$section][] = array( 'code' => $code, 'args' => $args );
+<<<<<<< HEAD
 
 		return true;
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	public function remove_error( $section, $code ) {
@@ -181,14 +245,21 @@ class WPCF7_ConfigValidator {
 
 		do_action( 'wpcf7_config_validator_validate', $this );
 
+<<<<<<< HEAD
+=======
+		$this->save();
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		return $this->is_valid();
 	}
 
 	public function save() {
+<<<<<<< HEAD
 		if ( $this->contact_form->initial() ) {
 			return;
 		}
 
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		delete_post_meta( $this->contact_form->id(), '_config_errors' );
 
 		if ( $this->errors ) {
@@ -197,6 +268,7 @@ class WPCF7_ConfigValidator {
 		}
 	}
 
+<<<<<<< HEAD
 	public function restore() {
 		$config_errors = get_post_meta(
 			$this->contact_form->id(), '_config_errors', true );
@@ -320,15 +392,30 @@ class WPCF7_ConfigValidator {
 
 			foreach ( $matches[1] as $insidelabel ) {
 				$tags = $form_tags_manager->scan( $insidelabel );
+=======
+	public function validate_form() {
+		$body = $this->contact_form->prop( 'form' );
+		$pattern = '%<label(?:[ \t\n]+.*?)?>(.+?)</label>%s';
+
+		if ( preg_match_all( $pattern, $body, $matches ) ) {
+			$manager = WPCF7_FormTagsManager::get_instance();
+
+			foreach ( $matches[1] as $insidelabel ) {
+				$tags = $manager->scan( $insidelabel );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 				$fields_count = 0;
 
 				foreach ( $tags as $tag ) {
 					$tag = new WPCF7_FormTag( $tag );
 
+<<<<<<< HEAD
 					$is_multiple_controls_container = wpcf7_form_tag_supports(
 						$tag->type, 'multiple-controls-container' );
 
 					if ( $is_multiple_controls_container ) {
+=======
+					if ( in_array( $tag->basetype, array( 'checkbox', 'radio' ) ) ) {
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 						$fields_count += count( $tag->values );
 
 						if ( $tag->has_option( 'free_text' ) ) {
@@ -339,15 +426,23 @@ class WPCF7_ConfigValidator {
 					}
 
 					if ( 1 < $fields_count ) {
+<<<<<<< HEAD
 						return $this->add_error( $section,
 							self::error_multiple_controls_in_label, array(
 								'link' => self::get_doc_link( 'multiple_controls_in_label' ),
 							)
 						);
+=======
+						$this->add_error( 'form.body',
+							self::error_multiple_controls_in_label,
+							array( 'link' => __( 'http://contactform7.com/configuration-errors/#form.body:error_multiple_controls_in_label', 'contact-form-7' ) ) );
+						return;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 					}
 				}
 			}
 		}
+<<<<<<< HEAD
 
 		return false;
 	}
@@ -386,6 +481,8 @@ class WPCF7_ConfigValidator {
 		}
 
 		return false;
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	public function validate_mail( $template = 'mail' ) {
@@ -404,9 +501,13 @@ class WPCF7_ConfigValidator {
 			'sender' => '',
 			'recipient' => '',
 			'additional_headers' => '',
+<<<<<<< HEAD
 			'body' => '',
 			'attachments' => '',
 		) );
+=======
+			'body' => '' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$callback = array( $this, 'replace_mail_tags_with_minimum_input' );
 
@@ -415,7 +516,16 @@ class WPCF7_ConfigValidator {
 			array( 'callback' => $callback ) );
 		$subject = $subject->replace_tags();
 		$subject = wpcf7_strip_newline( $subject );
+<<<<<<< HEAD
 		$this->detect_maybe_empty( sprintf( '%s.subject', $template ), $subject );
+=======
+
+		if ( '' === $subject ) {
+			$this->add_error( sprintf( '%s.subject', $template ),
+				self::error_maybe_empty,
+				array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.subject:error_maybe_empty', 'contact-form-7' ) ) );
+		}
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$sender = $components['sender'];
 		$sender = new WPCF7_MailTaggedText( $sender,
@@ -423,6 +533,7 @@ class WPCF7_ConfigValidator {
 		$sender = $sender->replace_tags();
 		$sender = wpcf7_strip_newline( $sender );
 
+<<<<<<< HEAD
 		if ( ! $this->detect_invalid_mailbox_syntax( sprintf( '%s.sender', $template ), $sender )
 		&& ! wpcf7_is_email_in_site_domain( $sender ) ) {
 			$this->add_error( sprintf( '%s.sender', $template ),
@@ -430,6 +541,16 @@ class WPCF7_ConfigValidator {
 					'link' => self::get_doc_link( 'email_not_in_site_domain' ),
 				)
 			);
+=======
+		if ( ! wpcf7_is_mailbox_list( $sender ) ) {
+			$this->add_error( sprintf( '%s.sender', $template ),
+				self::error_invalid_syntax,
+				array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.sender:error_invalid_syntax', 'contact-form-7' ) ) );
+		} elseif ( ! wpcf7_is_email_in_site_domain( $sender ) ) {
+			$this->add_error( sprintf( '%s.sender', $template ),
+				self::error_email_not_in_site_domain,
+				array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.sender:error_email_not_in_site_domain', 'contact-form-7' ) ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		}
 
 		$recipient = $components['recipient'];
@@ -438,8 +559,16 @@ class WPCF7_ConfigValidator {
 		$recipient = $recipient->replace_tags();
 		$recipient = wpcf7_strip_newline( $recipient );
 
+<<<<<<< HEAD
 		$this->detect_invalid_mailbox_syntax(
 			sprintf( '%s.recipient', $template ), $recipient );
+=======
+		if ( ! wpcf7_is_mailbox_list( $recipient ) ) {
+			$this->add_error( sprintf( '%s.recipient', $template ),
+				self::error_invalid_syntax,
+				array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.recipient:error_invalid_syntax', 'contact-form-7' ) ) );
+		}
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$additional_headers = $components['additional_headers'];
 		$additional_headers = new WPCF7_MailTaggedText( $additional_headers,
@@ -447,7 +576,10 @@ class WPCF7_ConfigValidator {
 		$additional_headers = $additional_headers->replace_tags();
 		$additional_headers = explode( "\n", $additional_headers );
 		$mailbox_header_types = array( 'reply-to', 'cc', 'bcc' );
+<<<<<<< HEAD
 		$invalid_mail_header_exists = false;
+=======
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		foreach ( $additional_headers as $header ) {
 			$header = trim( $header );
@@ -457,6 +589,7 @@ class WPCF7_ConfigValidator {
 			}
 
 			if ( ! preg_match( '/^([0-9A-Za-z-]+):(.+)$/', $header, $matches ) ) {
+<<<<<<< HEAD
 				$invalid_mail_header_exists = true;
 			} else {
 				$header_name = $matches[1];
@@ -481,10 +614,27 @@ class WPCF7_ConfigValidator {
 			);
 		}
 
+=======
+				$this->add_error( sprintf( '%s.additional_headers', $template ),
+					self::error_invalid_syntax,
+					array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.additional_headers:error_invalid_syntax', 'contact-form-7' ) ) );
+			} elseif ( in_array( strtolower( $matches[1] ), $mailbox_header_types )
+			&& ! wpcf7_is_mailbox_list( $matches[2] ) ) {
+				$this->add_error( sprintf( '%s.additional_headers', $template ),
+					self::error_invalid_syntax, array(
+						'message' =>
+							__( "The %name% field value is invalid.", 'contact-form-7' ),
+						'params' => array( 'name' => $matches[1] ),
+						'link' => __( 'http://contactform7.com/configuration-errors/#mail.additional_headers:error_invalid_syntax', 'contact-form-7' ) ) );
+			}
+		}
+
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		$body = $components['body'];
 		$body = new WPCF7_MailTaggedText( $body,
 			array( 'callback' => $callback ) );
 		$body = $body->replace_tags();
+<<<<<<< HEAD
 		$this->detect_maybe_empty( sprintf( '%s.body', $template ), $body );
 
 		if ( '' !== $components['attachments'] ) {
@@ -497,10 +647,40 @@ class WPCF7_ConfigValidator {
 
 				$this->detect_file_not_found(
 					sprintf( '%s.attachments', $template ), $line );
+=======
+
+		if ( '' === $body ) {
+			$this->add_error( sprintf( '%s.body', $template ),
+				self::error_maybe_empty,
+				array( 'link' => __( 'http://contactform7.com/configuration-errors/#mail.body:error_maybe_empty', 'contact-form-7' ) ) );
+		}
+	}
+
+	public function validate_messages() {
+		$messages = (array) $this->contact_form->prop( 'messages' );
+
+		if ( ! $messages ) {
+			return;
+		}
+
+		if ( isset( $messages['captcha_not_match'] )
+		&& ! wpcf7_use_really_simple_captcha() ) {
+			unset( $messages['captcha_not_match'] );
+		}
+
+		foreach ( $messages as $key => $message ) {
+			$stripped = wp_strip_all_tags( $message );
+
+			if ( $stripped != $message ) {
+				$this->add_error( sprintf( 'messages.%s', $key ),
+					self::error_html_in_message,
+					array( 'link' => __( 'http://contactform7.com/configuration-errors/#messages:error_html_in_message', 'contact-form-7' ) ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			}
 		}
 	}
 
+<<<<<<< HEAD
 	public function detect_invalid_mailbox_syntax( $section, $content, $args = '' ) {
 		$args = wp_parse_args( $args, array(
 			'link' => self::get_doc_link( 'invalid_mailbox_syntax' ),
@@ -577,5 +757,92 @@ class WPCF7_ConfigValidator {
 		}
 
 		return false;
+=======
+	public function replace_mail_tags_with_minimum_input( $matches ) {
+		// allow [[foo]] syntax for escaping a tag
+		if ( $matches[1] == '[' && $matches[4] == ']' ) {
+			return substr( $matches[0], 1, -1 );
+		}
+
+		$tag = $matches[0];
+		$tagname = $matches[2];
+		$values = $matches[3];
+
+		if ( ! empty( $values ) ) {
+			preg_match_all( '/"[^"]*"|\'[^\']*\'/', $values, $matches );
+			$values = wpcf7_strip_quote_deep( $matches[0] );
+		}
+
+		$do_not_heat = false;
+
+		if ( preg_match( '/^_raw_(.+)$/', $tagname, $matches ) ) {
+			$tagname = trim( $matches[1] );
+			$do_not_heat = true;
+		}
+
+		$format = '';
+
+		if ( preg_match( '/^_format_(.+)$/', $tagname, $matches ) ) {
+			$tagname = trim( $matches[1] );
+			$format = $values[0];
+		}
+
+		$example_email = 'example@example.com';
+		$example_text = 'example';
+		$example_blank = '';
+
+		$form_tags = $this->contact_form->scan_form_tags(
+			array( 'name' => $tagname ) );
+
+		if ( $form_tags ) {
+			$form_tag = new WPCF7_FormTag( $form_tags[0] );
+
+			$is_required = ( $form_tag->is_required() || 'radio' == $form_tag->type );
+
+			if ( ! $is_required ) {
+				return $example_blank;
+			}
+
+			$is_selectable = in_array( $form_tag->basetype,
+				array( 'radio', 'checkbox', 'select' ) );
+
+			if ( $is_selectable ) {
+				if ( $form_tag->pipes instanceof WPCF7_Pipes ) {
+					if ( $do_not_heat ) {
+						$before_pipes = $form_tag->pipes->collect_befores();
+						$last_item = array_pop( $before_pipes );
+					} else {
+						$after_pipes = $form_tag->pipes->collect_afters();
+						$last_item = array_pop( $after_pipes );
+					}
+				} else {
+					$last_item = array_pop( $form_tag->values );
+				}
+
+				if ( $last_item && wpcf7_is_mailbox_list( $last_item ) ) {
+					return $example_email;
+				} else {
+					return $example_text;
+				}
+			}
+
+			if ( 'email' == $form_tag->basetype ) {
+				return $example_email;
+			} else {
+				return $example_text;
+			}
+
+		} else {
+			$tagname = preg_replace( '/^wpcf7\./', '_', $tagname ); // for back-compat
+
+			if ( '_post_author_email' == $tagname ) {
+				return $example_email;
+			} elseif ( '_' == substr( $tagname, 0, 1 ) ) { // maybe special mail tag
+				return $example_text;
+			}
+		}
+
+		return $tag;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 }

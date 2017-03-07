@@ -52,8 +52,12 @@ function wpcf7_ajax_json_echo() {
 			$items = array(
 				'mailSent' => false,
 				'into' => '#' . $unit_tag,
+<<<<<<< HEAD
 				'captcha' => null,
 			);
+=======
+				'captcha' => null );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 			$result = $contact_form->submit( true );
 
@@ -73,8 +77,12 @@ function wpcf7_ajax_json_echo() {
 						'into' => 'span.wpcf7-form-control-wrap.'
 							. sanitize_html_class( $name ),
 						'message' => $field['reason'],
+<<<<<<< HEAD
 						'idref' => $field['idref'],
 					);
+=======
+						'idref' => $field['idref'] );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 				}
 
 				$items['invalids'] = $invalids;
@@ -110,17 +118,27 @@ function wpcf7_ajax_json_echo() {
 }
 
 function wpcf7_is_xhr() {
+<<<<<<< HEAD
 	if ( ! isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 		return false;
 	}
+=======
+	if ( ! isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) )
+		return false;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	return $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 }
 
 function wpcf7_submit_nonajax() {
+<<<<<<< HEAD
 	if ( ! isset( $_POST['_wpcf7'] ) ) {
 		return;
 	}
+=======
+	if ( ! isset( $_POST['_wpcf7'] ) )
+		return;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( $contact_form = wpcf7_contact_form( (int) $_POST['_wpcf7'] ) ) {
 		$contact_form->submit();
@@ -130,11 +148,16 @@ function wpcf7_submit_nonajax() {
 add_filter( 'widget_text', 'wpcf7_widget_text_filter', 9 );
 
 function wpcf7_widget_text_filter( $content ) {
+<<<<<<< HEAD
 	$pattern = '/\[[\r\n\t ]*contact-form(-7)?[\r\n\t ].*?\]/';
 
 	if ( ! preg_match( $pattern, $content ) ) {
 		return $content;
 	}
+=======
+	if ( ! preg_match( '/\[[\r\n\t ]*contact-form(-7)?[\r\n\t ].*?\]/', $content ) )
+		return $content;
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	$content = do_shortcode( $content );
 
@@ -174,11 +197,16 @@ function wpcf7_enqueue_scripts() {
 	$_wpcf7 = array(
 		'recaptcha' => array(
 			'messages' => array(
+<<<<<<< HEAD
 				'empty' =>
 					__( 'Please verify that you are not a robot.', 'contact-form-7' ),
 			),
 		),
 	);
+=======
+				'empty' => __( 'Please verify that you are not a robot.',
+					'contact-form-7' ) ) ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
 		$_wpcf7['cached'] = 1;

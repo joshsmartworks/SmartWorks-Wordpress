@@ -9,10 +9,14 @@ add_action( 'wpcf7_init', 'wpcf7_add_form_tag_checkbox' );
 
 function wpcf7_add_form_tag_checkbox() {
 	wpcf7_add_form_tag( array( 'checkbox', 'checkbox*', 'radio' ),
+<<<<<<< HEAD
 		'wpcf7_checkbox_form_tag_handler', array(
 			'name-attr' => true,
 			'selectable-values' => true,
 		 	'multiple-controls-container' => true ) );
+=======
+		'wpcf7_checkbox_form_tag_handler', true );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_checkbox_form_tag_handler( $tag ) {
@@ -292,7 +296,11 @@ function wpcf7_tag_generator_checkbox( $contact_form, $args = '' ) {
 		$description = __( "Generate a form-tag for a group of radio buttons. For more details, see %s.", 'contact-form-7' );
 	}
 
+<<<<<<< HEAD
 	$desc_link = wpcf7_link( __( 'https://contactform7.com/checkboxes-radio-buttons-and-menus/', 'contact-form-7' ), __( 'Checkboxes, Radio Buttons and Menus', 'contact-form-7' ) );
+=======
+	$desc_link = wpcf7_link( __( 'http://contactform7.com/checkboxes-radio-buttons-and-menus/', 'contact-form-7' ), __( 'Checkboxes, Radio Buttons and Menus', 'contact-form-7' ) );
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 ?>
 <div class="control-box">
