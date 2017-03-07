@@ -9,11 +9,7 @@ add_action( 'wpcf7_init', 'wpcf7_add_form_tag_captcha' );
 
 function wpcf7_add_form_tag_captcha() {
 	wpcf7_add_form_tag( array( 'captchac', 'captchar' ),
-<<<<<<< HEAD
 		'wpcf7_captcha_form_tag_handler', array( 'name-attr' => true ) );
-=======
-		'wpcf7_captcha_form_tag_handler', true );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_captcha_form_tag_handler( $tag ) {
@@ -232,11 +228,7 @@ function wpcf7_tag_generator_captcha( $contact_form, $args = '' ) {
 
 	$description = __( "Generate form-tags for a CAPTCHA image and corresponding response input field. For more details, see %s.", 'contact-form-7' );
 
-<<<<<<< HEAD
 	$desc_link = wpcf7_link( __( 'https://contactform7.com/captcha/', 'contact-form-7' ), __( 'CAPTCHA', 'contact-form-7' ) );
-=======
-	$desc_link = wpcf7_link( __( 'http://contactform7.com/captcha/', 'contact-form-7' ), __( 'CAPTCHA', 'contact-form-7' ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 ?>
 <div class="control-box">

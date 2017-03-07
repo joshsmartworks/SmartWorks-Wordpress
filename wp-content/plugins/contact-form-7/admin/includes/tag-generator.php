@@ -27,12 +27,8 @@ class WPCF7_TagGenerator {
 			'title' => $title,
 			'content' => 'tag-generator-panel-' . $id,
 			'options' => $options,
-<<<<<<< HEAD
 			'callback' => $callback,
 		);
-=======
-			'callback' => $callback );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		return true;
 	}
@@ -61,12 +57,8 @@ class WPCF7_TagGenerator {
 			$options = array_merge( $options, array(
 				'id' => $id,
 				'title' => $panel['title'],
-<<<<<<< HEAD
 				'content' => $panel['content'],
 			) );
-=======
-				'content' => $panel['content'] ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 			if ( is_callable( $callback ) ) {
 				echo sprintf( '<div id="%s" class="hidden">',

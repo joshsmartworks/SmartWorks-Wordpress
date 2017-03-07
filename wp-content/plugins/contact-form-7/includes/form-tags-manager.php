@@ -1,16 +1,9 @@
 <?php
 
-<<<<<<< HEAD
 function wpcf7_add_form_tag( $tag, $func, $features = '' ) {
 	$manager = WPCF7_FormTagsManager::get_instance();
 
 	return $manager->add( $tag, $func, $features );
-=======
-function wpcf7_add_form_tag( $tag, $func, $has_name = false ) {
-	$manager = WPCF7_FormTagsManager::get_instance();
-
-	return $manager->add( $tag, $func, $has_name );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_remove_form_tag( $tag ) {
@@ -35,24 +28,17 @@ function wpcf7_scan_form_tags( $cond = null ) {
 	return array();
 }
 
-<<<<<<< HEAD
 function wpcf7_form_tag_supports( $tag, $feature ) {
 	$manager = WPCF7_FormTagsManager::get_instance();
 
 	return $manager->tag_type_supports( $tag, $feature );
 }
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 class WPCF7_FormTagsManager {
 
 	private static $instance;
 
-<<<<<<< HEAD
 	private $tag_types = array();
-=======
-	private $tags = array();
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	private $scanned_tags = null; // Tags scanned at the last time of scan()
 
 	private function __construct() {}
@@ -69,46 +55,32 @@ class WPCF7_FormTagsManager {
 		return $this->scanned_tags;
 	}
 
-<<<<<<< HEAD
 	public function add( $tag, $func, $features = '' ) {
-=======
-	public function add( $tag, $func, $has_name = false ) {
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		if ( ! is_callable( $func ) ) {
 			return;
 		}
 
-<<<<<<< HEAD
 		if ( true === $features ) { // for back-compat
 			$features = array( 'name-attr' => true );
 		}
 
 		$features = wp_parse_args( $features, array() );
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		$tags = array_filter( array_unique( (array) $tag ) );
 
 		foreach ( $tags as $tag ) {
 			$tag = $this->sanitize_tag_type( $tag );
 
 			if ( ! $this->tag_type_exists( $tag ) ) {
-<<<<<<< HEAD
 				$this->tag_types[$tag] = array(
 					'function' => $func,
 					'features' => $features,
 				);
-=======
-				$this->tags[$tag] = array(
-					'function' => $func,
-					'has_name' => (boolean) $has_name );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			}
 		}
 	}
 
 	public function tag_type_exists( $tag ) {
-<<<<<<< HEAD
 		return isset( $this->tag_types[$tag] );
 	}
 
@@ -118,9 +90,6 @@ class WPCF7_FormTagsManager {
 		}
 
 		return false;
-=======
-		return isset( $this->tags[$tag] );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	private function sanitize_tag_type( $tag ) {
@@ -131,19 +100,11 @@ class WPCF7_FormTagsManager {
 	}
 
 	public function remove( $tag ) {
-<<<<<<< HEAD
 		unset( $this->tag_types[$tag] );
 	}
 
 	public function normalize( $content ) {
 		if ( empty( $this->tag_types ) ) {
-=======
-		unset( $this->tags[$tag] );
-	}
-
-	public function normalize( $content ) {
-		if ( empty( $this->tags ) ) {
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			return $content;
 		}
 
@@ -186,11 +147,7 @@ class WPCF7_FormTagsManager {
 	public function scan( $content, $replace = false ) {
 		$this->scanned_tags = array();
 
-<<<<<<< HEAD
 		if ( empty( $this->tag_types ) ) {
-=======
-		if ( empty( $this->tags ) ) {
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			if ( $replace ) {
 				return $content;
 			} else {
@@ -215,7 +172,6 @@ class WPCF7_FormTagsManager {
 		}
 	}
 
-<<<<<<< HEAD
 	public function filter( $content, $cond ) {
 		if ( is_array( $content ) ) {
 			$tags = $content;
@@ -269,10 +225,6 @@ class WPCF7_FormTagsManager {
 
 	private function tag_regex() {
 		$tagnames = array_keys( $this->tag_types );
-=======
-	private function tag_regex() {
-		$tagnames = array_keys( $this->tags );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		$tagregexp = join( '|', array_map( 'preg_quote', $tagnames ) );
 
 		return '(\[?)'
@@ -304,7 +256,6 @@ class WPCF7_FormTagsManager {
 			'pipes' => null,
 			'labels' => array(),
 			'attr' => '',
-<<<<<<< HEAD
 			'content' => '',
 		);
 
@@ -312,13 +263,6 @@ class WPCF7_FormTagsManager {
 			if ( is_array( $attr['options'] ) ) {
 				if ( $this->tag_type_supports( $tag, 'name-attr' )
 				&& ! empty( $attr['options'] ) ) {
-=======
-			'content' => '' );
-
-		if ( is_array( $attr ) ) {
-			if ( is_array( $attr['options'] ) ) {
-				if ( $this->tags[$tag]['has_name'] && ! empty( $attr['options'] ) ) {
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 					$scanned_tag['name'] = array_shift( $attr['options'] );
 
 					if ( ! wpcf7_is_name( $scanned_tag['name'] ) ) {
@@ -357,11 +301,7 @@ class WPCF7_FormTagsManager {
 		$this->scanned_tags[] = $scanned_tag;
 
 		if ( $replace ) {
-<<<<<<< HEAD
 			$func = $this->tag_types[$tag]['function'];
-=======
-			$func = $this->tags[$tag]['function'];
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 			return $m[1] . call_user_func( $func, $scanned_tag ) . $m[6];
 		} else {
 			return $m[0];

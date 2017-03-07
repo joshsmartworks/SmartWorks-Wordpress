@@ -56,68 +56,31 @@ span.shortcode > input {
 	color: #23282d;
 }
 
-<<<<<<< HEAD
 div.config-error, span.config-error, ul.config-error {
 	color: #444;
-=======
-#misc-publishing-actions .misc-pub-section::before {
-	content: "\f488";
-	-moz-osx-font-smoothing: grayscale;
-	display: inline-block;
-	font: 20px/1 dashicons;
-	left: -1px;
-	padding: 0 2px 0 0;
-	position: relative;
-	text-decoration: none !important;
-	top: 0;
-	vertical-align: top;
-	color: #82878c;
-}
-
-#misc-publishing-actions .misc-pub-section.warning::before {
-	content: "\f534";
-}
-
-#misc-publishing-actions .misc-pub-section.warning a.external {
-	font-style: italic;
-}
-
-div.config-error, span.config-error, ul.config-error {
-	color: #d00;
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	font-style: normal;
 	font-size: 13px;
 }
 
-<<<<<<< HEAD
 div.config-error span.dashicons {
 	color: #82878c;
 }
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 ul.config-error {
 	margin: 0;
 }
 
 ul.config-error li {
-<<<<<<< HEAD
 	list-style: disc inside;
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	padding: 0 4px;
 	margin: 0;
 }
 
 ul.config-error li a.external {
-<<<<<<< HEAD
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
 	vertical-align: middle;
-=======
-	font-style: italic;
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 [data-config-field][aria-invalid="true"] {
@@ -175,7 +138,6 @@ ul.config-error li a.external {
 	color: #000;
 }
 
-<<<<<<< HEAD
 #contact-form-editor-tabs li a span.dashicons {
 	font-style: normal;
 	padding: 6px 0 4px 4px;
@@ -186,8 +148,6 @@ ul.config-error li a.external {
 	display: none;
 }
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 #contact-form-editor .contact-form-editor-panel h2 {
 	font-size: 18px;
 	font-weight: 400;
@@ -356,13 +316,10 @@ ul.config-error li a.external {
 	width: 38%;
 }
 
-<<<<<<< HEAD
 .wp-list-table .config-error span.dashicons {
 	color: #82878c;
 }
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 /*
  * Welcome Panel
  */

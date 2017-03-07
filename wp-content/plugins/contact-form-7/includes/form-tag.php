@@ -36,12 +36,8 @@ class WPCF7_FormTag {
 			'int' => '[0-9]+',
 			'signed_int' => '-?[0-9]+',
 			'class' => '[-0-9a-zA-Z_]+',
-<<<<<<< HEAD
 			'id' => '[-0-9a-zA-Z_]+',
 		);
-=======
-			'id' => '[-0-9a-zA-Z_]+' );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( isset( $preset_patterns[$pattern] ) ) {
 			$pattern = $preset_patterns[$pattern];

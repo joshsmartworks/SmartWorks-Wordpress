@@ -32,12 +32,8 @@ function wpcf7_convert_to_cpt( $new_ver, $old_ver ) {
 		$postarr = array(
 			'post_type' => 'wpcf7_contact_form',
 			'post_status' => 'publish',
-<<<<<<< HEAD
 			'post_title' => maybe_unserialize( $row->title ),
 		);
-=======
-			'post_title' => maybe_unserialize( $row->title ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$post_id = wp_insert_post( $postarr );
 
@@ -67,12 +63,8 @@ function wpcf7_prepend_underscore( $new_ver, $old_ver ) {
 
 	$posts = WPCF7_ContactForm::find( array(
 		'post_status' => 'any',
-<<<<<<< HEAD
 		'posts_per_page' => -1,
 	) );
-=======
-		'posts_per_page' => -1 ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	foreach ( $posts as $post ) {
 		$props = $post->get_properties();

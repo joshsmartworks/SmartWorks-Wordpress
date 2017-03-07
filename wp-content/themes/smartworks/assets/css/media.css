@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 991px)  {
-<<<<<<< HEAD
+
 
 .container-block {
 	padding-right: 0;
@@ -97,9 +97,7 @@
 	}
 
 
-=======
-	
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+
     .navbar-brand img {
 	    margin-right: auto;
 	    margin-left: auto;
@@ -138,7 +136,7 @@
 		margin-top: -33px;
 	}
 
-<<<<<<< HEAD
+
 
 	/* Contact Page */
 
@@ -148,14 +146,13 @@
 		text-align: center;
 	}
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+
 }
 
 
 @media screen and (max-width: 767px)  {
 
-<<<<<<< HEAD
+
  	.container-block {
 		padding-right: 15px;
 	}
@@ -168,7 +165,7 @@
 		margin-left: -55px !important;
     }
 
-=======
+/*=======
 	.navbar-default .navbar-toggle {
     	border-color: transparent;
     	margin-top: 16px;
@@ -197,7 +194,8 @@
 		margin-bottom: 10px;
 	}
 
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+>>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca*/
+
 	.hero h1 {
 		font-size: 2.8em;
 		color: #222;
@@ -259,7 +257,7 @@
 		text-align: center;
 	}
 
-<<<<<<< HEAD
+
 	/* Contact Page */
 
 	.hero-contact h1 {
@@ -270,8 +268,7 @@
 		font-size: 1em !important; 
 	}
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
+
 	@media screen and (max-width: 568px) {
 		.top-bar {
 			height: 120vh;

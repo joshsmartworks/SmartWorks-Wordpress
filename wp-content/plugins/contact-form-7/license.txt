@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Contact Form 7 WordPress Plugin, 2007-2017 Takayuki Miyoshi
-=======
-Contact Form 7 WordPress Plugin, 2007-2016 Takayuki Miyoshi
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 Contact Form 7 is distributed under the terms of the GNU GPL
 
 This program is free software; you can redistribute it and/or modify

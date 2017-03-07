@@ -10,10 +10,7 @@ class WPCF7_ContactForm {
 	private $id;
 	private $name;
 	private $title;
-<<<<<<< HEAD
 	private $locale;
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	private $properties = array();
 	private $unit_tag;
 	private $responses_count = 0;
@@ -32,17 +29,11 @@ class WPCF7_ContactForm {
 		register_post_type( self::post_type, array(
 			'labels' => array(
 				'name' => __( 'Contact Forms', 'contact-form-7' ),
-<<<<<<< HEAD
 				'singular_name' => __( 'Contact Form', 'contact-form-7' ),
 			),
 			'rewrite' => false,
 			'query_var' => false,
 		) );
-=======
-				'singular_name' => __( 'Contact Form', 'contact-form-7' ) ),
-			'rewrite' => false,
-			'query_var' => false ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	public static function find( $args = '' ) {
@@ -51,12 +42,8 @@ class WPCF7_ContactForm {
 			'posts_per_page' => -1,
 			'offset' => 0,
 			'orderby' => 'ID',
-<<<<<<< HEAD
 			'order' => 'ASC',
 		);
-=======
-			'order' => 'ASC' );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$args = wp_parse_args( $args, $defaults );
 
@@ -69,14 +56,9 @@ class WPCF7_ContactForm {
 
 		$objs = array();
 
-<<<<<<< HEAD
 		foreach ( (array) $posts as $post ) {
 			$objs[] = new self( $post );
 		}
-=======
-		foreach ( (array) $posts as $post )
-			$objs[] = new self( $post );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		return $objs;
 	}
@@ -212,12 +194,8 @@ class WPCF7_ContactForm {
 			'mail' => array(),
 			'mail_2' => array(),
 			'messages' => array(),
-<<<<<<< HEAD
 			'additional_settings' => '',
 		) );
-=======
-			'additional_settings' => '' ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$properties = (array) apply_filters( 'wpcf7_contact_form_properties',
 			$properties, $this );
@@ -247,10 +225,7 @@ class WPCF7_ContactForm {
 	}
 
 	public function set_title( $title ) {
-<<<<<<< HEAD
 		$title = strip_tags( $title );
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		$title = trim( $title );
 
 		if ( '' === $title ) {
@@ -260,7 +235,6 @@ class WPCF7_ContactForm {
 		$this->title = $title;
 	}
 
-<<<<<<< HEAD
 	public function locale() {
 		if ( wpcf7_is_valid_locale( $this->locale ) ) {
 			return $this->locale;
@@ -279,8 +253,6 @@ class WPCF7_ContactForm {
 		}
 	}
 
-=======
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	public function shortcode_attr( $name ) {
 		if ( isset( $this->shortcode_atts[$name] ) ) {
 			return (string) $this->shortcode_atts[$name];
@@ -307,12 +279,8 @@ class WPCF7_ContactForm {
 			'html_id' => '',
 			'html_name' => '',
 			'html_class' => '',
-<<<<<<< HEAD
 			'output' => 'form',
 		) );
-=======
-			'output' => 'form' ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$this->shortcode_atts = $args;
 
@@ -329,7 +297,6 @@ class WPCF7_ContactForm {
 			$lang_tag = $matches[1];
 		}
 
-<<<<<<< HEAD
 		$html = sprintf( '<div %s>',
 			wpcf7_format_atts( array(
 				'role' => 'form',
@@ -342,17 +309,6 @@ class WPCF7_ContactForm {
 		);
 
 		$html .= "\n" . $this->screen_reader_response() . "\n";
-=======
-		$html = sprintf( '<div %s>', wpcf7_format_atts( array(
-			'role' => 'form',
-			'class' => 'wpcf7',
-			'id' => $this->unit_tag,
-			( get_option( 'html_type' ) == 'text/html' ) ? 'lang' : 'xml:lang'
-				=> $lang_tag,
-			'dir' => wpcf7_is_rtl( $this->locale ) ? 'rtl' : 'ltr' ) ) ) . "\n";
-
-		$html .= $this->screen_reader_response() . "\n";
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$url = wpcf7_get_request_uri();
 
@@ -413,12 +369,8 @@ class WPCF7_ContactForm {
 			'class' => $class,
 			'enctype' => wpcf7_enctype_value( $enctype ),
 			'autocomplete' => $autocomplete,
-<<<<<<< HEAD
 			'novalidate' => $novalidate ? 'novalidate' : '',
 		);
-=======
-			'novalidate' => $novalidate ? 'novalidate' : '' );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( '' !== $id_attr ) {
 			$atts['id'] = $id_attr;
@@ -449,12 +401,8 @@ class WPCF7_ContactForm {
 			'_wpcf7' => $this->id,
 			'_wpcf7_version' => WPCF7_VERSION,
 			'_wpcf7_locale' => $this->locale,
-<<<<<<< HEAD
 			'_wpcf7_unit_tag' => $this->unit_tag,
 		);
-=======
-			'_wpcf7_unit_tag' => $this->unit_tag );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( WPCF7_VERIFY_NONCE ) {
 			$hidden_fields['_wpnonce'] = wpcf7_create_nonce( $this->id );
@@ -500,12 +448,8 @@ class WPCF7_ContactForm {
 
 		$atts = array(
 			'class' => trim( $class ),
-<<<<<<< HEAD
 			'role' => trim( $role ),
 		);
-=======
-			'role' => trim( $role ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$atts = wpcf7_format_atts( $atts );
 
@@ -616,7 +560,6 @@ class WPCF7_ContactForm {
 	public function scan_form_tags( $cond = null ) {
 		$manager = WPCF7_FormTagsManager::get_instance();
 
-<<<<<<< HEAD
 		if ( empty( $this->scanned_form_tags ) ) {
 			$this->scanned_form_tags = $manager->scan( $this->prop( 'form' ) );
 		}
@@ -624,55 +567,6 @@ class WPCF7_ContactForm {
 		$tags = $this->scanned_form_tags;
 
 		return $manager->filter( $tags, $cond );
-=======
-		if ( ! empty( $this->scanned_form_tags ) ) {
-			$scanned = $this->scanned_form_tags;
-		} else {
-			$scanned = $manager->scan( $this->prop( 'form' ) );
-			$this->scanned_form_tags = $scanned;
-		}
-
-		if ( empty( $scanned ) ) {
-			return array();
-		}
-
-		if ( ! is_array( $cond ) || empty( $cond ) ) {
-			return $scanned;
-		}
-
-		for ( $i = 0, $size = count( $scanned ); $i < $size; $i++ ) {
-
-			if ( isset( $cond['type'] ) ) {
-				if ( is_string( $cond['type'] ) && ! empty( $cond['type'] ) ) {
-					if ( $scanned[$i]['type'] != $cond['type'] ) {
-						unset( $scanned[$i] );
-						continue;
-					}
-				} elseif ( is_array( $cond['type'] ) ) {
-					if ( ! in_array( $scanned[$i]['type'], $cond['type'] ) ) {
-						unset( $scanned[$i] );
-						continue;
-					}
-				}
-			}
-
-			if ( isset( $cond['name'] ) ) {
-				if ( is_string( $cond['name'] ) && ! empty( $cond['name'] ) ) {
-					if ( $scanned[$i]['name'] != $cond['name'] ) {
-						unset ( $scanned[$i] );
-						continue;
-					}
-				} elseif ( is_array( $cond['name'] ) ) {
-					if ( ! in_array( $scanned[$i]['name'], $cond['name'] ) ) {
-						unset( $scanned[$i] );
-						continue;
-					}
-				}
-			}
-		}
-
-		return array_values( $scanned );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 	}
 
 	public function form_scan_shortcode( $cond = null ) {
@@ -690,14 +584,9 @@ class WPCF7_ContactForm {
 	public function collect_mail_tags( $args = '' ) {
 		$args = wp_parse_args( $args, array(
 			'include' => array(),
-<<<<<<< HEAD
 			'exclude' =>
 				array( 'acceptance', 'captchac', 'captchar', 'quiz', 'count' ),
 		) );
-=======
-			'exclude' => array(
-				'acceptance', 'captchac', 'captchar', 'quiz', 'count' ) ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$tags = $this->scan_form_tags();
 		$mailtags = array();
@@ -726,7 +615,6 @@ class WPCF7_ContactForm {
 	}
 
 	public function suggest_mail_tags( $for = 'mail' ) {
-<<<<<<< HEAD
 		$mail = wp_parse_args( $this->prop( $for ),
 			array(
 				'active' => false,
@@ -740,12 +628,6 @@ class WPCF7_ContactForm {
 				'exclude_blank' => false,
 			)
 		);
-=======
-		$mail = wp_parse_args( $this->prop( $for ), array(
-			'active' => false, 'recipient' => '', 'sender' => '',
-			'subject' => '', 'body' => '', 'additional_headers' => '',
-			'attachments' => '', 'use_html' => false, 'exclude_blank' => false ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		$mail = array_filter( $mail );
 
@@ -765,17 +647,11 @@ class WPCF7_ContactForm {
 		$submission = WPCF7_Submission::get_instance( $this );
 
 		$result = array(
-<<<<<<< HEAD
 			'contact_form_id' => $this->id(),
 			'status' => $submission->get_status(),
 			'message' => $submission->get_response(),
 			'demo_mode' => $this->in_demo_mode(),
 		);
-=======
-			'status' => $submission->get_status(),
-			'message' => $submission->get_response(),
-			'demo_mode' => $this->in_demo_mode() );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( $submission->is( 'validation_failed' ) ) {
 			$result['invalid_fields'] = $submission->get_invalid_fields();
@@ -898,23 +774,15 @@ class WPCF7_ContactForm {
 				'post_type' => self::post_type,
 				'post_status' => 'publish',
 				'post_title' => $this->title,
-<<<<<<< HEAD
 				'post_content' => trim( $post_content ),
 			) );
-=======
-				'post_content' => trim( $post_content ) ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		} else {
 			$post_id = wp_update_post( array(
 				'ID' => (int) $this->id,
 				'post_status' => 'publish',
 				'post_title' => $this->title,
-<<<<<<< HEAD
 				'post_content' => trim( $post_content ),
 			) );
-=======
-				'post_content' => trim( $post_content ) ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 		}
 
 		if ( $post_id ) {
@@ -950,14 +818,9 @@ class WPCF7_ContactForm {
 	}
 
 	public function delete() {
-<<<<<<< HEAD
 		if ( $this->initial() ) {
 			return;
 		}
-=======
-		if ( $this->initial() )
-			return;
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 		if ( wp_delete_post( $this->id, true ) ) {
 			$this->id = 0;
@@ -989,132 +852,3 @@ class WPCF7_ContactForm {
 		return apply_filters( 'wpcf7_contact_form_shortcode', $shortcode, $args, $this );
 	}
 }
-<<<<<<< HEAD
-=======
-
-function wpcf7_contact_form( $id ) {
-	return WPCF7_ContactForm::get_instance( $id );
-}
-
-function wpcf7_get_contact_form_by_old_id( $old_id ) {
-	global $wpdb;
-
-	$q = "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_old_cf7_unit_id'"
-		. $wpdb->prepare( " AND meta_value = %d", $old_id );
-
-	if ( $new_id = $wpdb->get_var( $q ) ) {
-		return wpcf7_contact_form( $new_id );
-	}
-}
-
-function wpcf7_get_contact_form_by_title( $title ) {
-	$page = get_page_by_title( $title, OBJECT, WPCF7_ContactForm::post_type );
-
-	if ( $page ) {
-		return wpcf7_contact_form( $page->ID );
-	}
-
-	return null;
-}
-
-function wpcf7_get_current_contact_form() {
-	if ( $current = WPCF7_ContactForm::get_current() ) {
-		return $current;
-	}
-}
-
-function wpcf7_is_posted() {
-	if ( ! $contact_form = wpcf7_get_current_contact_form() ) {
-		return false;
-	}
-
-	return $contact_form->is_posted();
-}
-
-function wpcf7_get_hangover( $name, $default = null ) {
-	if ( ! wpcf7_is_posted() ) {
-		return $default;
-	}
-
-	$submission = WPCF7_Submission::get_instance();
-
-	if ( ! $submission || $submission->is( 'mail_sent' ) ) {
-		return $default;
-	}
-
-	return isset( $_POST[$name] ) ? wp_unslash( $_POST[$name] ) : $default;
-}
-
-function wpcf7_get_validation_error( $name ) {
-	if ( ! $contact_form = wpcf7_get_current_contact_form() ) {
-		return '';
-	}
-
-	return $contact_form->validation_error( $name );
-}
-
-function wpcf7_get_message( $status ) {
-	if ( ! $contact_form = wpcf7_get_current_contact_form() ) {
-		return '';
-	}
-
-	return $contact_form->message( $status );
-}
-
-function wpcf7_form_controls_class( $type, $default = '' ) {
-	$type = trim( $type );
-	$default = array_filter( explode( ' ', $default ) );
-
-	$classes = array_merge( array( 'wpcf7-form-control' ), $default );
-
-	$typebase = rtrim( $type, '*' );
-	$required = ( '*' == substr( $type, -1 ) );
-
-	$classes[] = 'wpcf7-' . $typebase;
-
-	if ( $required ) {
-		$classes[] = 'wpcf7-validates-as-required';
-	}
-
-	$classes = array_unique( $classes );
-
-	return implode( ' ', $classes );
-}
-
-function wpcf7_contact_form_tag_func( $atts, $content = null, $code = '' ) {
-	if ( is_feed() ) {
-		return '[contact-form-7]';
-	}
-
-	if ( 'contact-form-7' == $code ) {
-		$atts = shortcode_atts( array(
-			'id' => 0,
-			'title' => '',
-			'html_id' => '',
-			'html_name' => '',
-			'html_class' => '',
-			'output' => 'form' ), $atts, 'wpcf7' );
-
-		$id = (int) $atts['id'];
-		$title = trim( $atts['title'] );
-
-		if ( ! $contact_form = wpcf7_contact_form( $id ) ) {
-			$contact_form = wpcf7_get_contact_form_by_title( $title );
-		}
-
-	} else {
-		if ( is_string( $atts ) ) {
-			$atts = explode( ' ', $atts, 2 );
-		}
-
-		$id = (int) array_shift( $atts );
-		$contact_form = wpcf7_get_contact_form_by_old_id( $id );
-	}
-
-	if ( ! $contact_form ) {
-		return '[contact-form-7 404 "Not Found"]';
-	}
-
-	return $contact_form->form_html( $atts );
-}
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca

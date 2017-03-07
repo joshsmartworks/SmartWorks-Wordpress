@@ -11,11 +11,7 @@ add_action( 'wpcf7_init', 'wpcf7_add_form_tag_number' );
 
 function wpcf7_add_form_tag_number() {
 	wpcf7_add_form_tag( array( 'number', 'number*', 'range', 'range*' ),
-<<<<<<< HEAD
 		'wpcf7_number_form_tag_handler', array( 'name-attr' => true ) );
-=======
-		'wpcf7_number_form_tag_handler', true );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 }
 
 function wpcf7_number_form_tag_handler( $tag ) {
@@ -157,11 +153,7 @@ function wpcf7_tag_generator_number( $contact_form, $args = '' ) {
 
 	$description = __( "Generate a form-tag for a field for numeric value input. For more details, see %s.", 'contact-form-7' );
 
-<<<<<<< HEAD
 	$desc_link = wpcf7_link( __( 'https://contactform7.com/number-fields/', 'contact-form-7' ), __( 'Number Fields', 'contact-form-7' ) );
-=======
-	$desc_link = wpcf7_link( __( 'http://contactform7.com/number-fields/', 'contact-form-7' ), __( 'Number Fields', 'contact-form-7' ) );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 ?>
 <div class="control-box">

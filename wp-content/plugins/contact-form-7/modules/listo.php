@@ -14,11 +14,7 @@ function wpcf7_listo( $data, $options, $args ) {
 	$args = wp_parse_args( $args, array() );
 
 	$contact_form = wpcf7_get_current_contact_form();
-<<<<<<< HEAD
 	$args['locale'] = $contact_form->locale();
-=======
-	$args['locale'] = $contact_form->locale;
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 	foreach ( (array) $options as $option ) {
 		$option = explode( '.', $option );

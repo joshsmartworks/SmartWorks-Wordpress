@@ -1,31 +1,18 @@
 <?php
 /*
 Plugin Name: Contact Form 7
-<<<<<<< HEAD
 Plugin URI: https://contactform7.com/
-=======
-Plugin URI: http://contactform7.com/
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 Description: Just another contact form plugin. Simple but flexible.
 Author: Takayuki Miyoshi
 Author URI: http://ideasilo.wordpress.com/
 Text Domain: contact-form-7
 Domain Path: /languages/
-<<<<<<< HEAD
 Version: 4.7
 */
 
 define( 'WPCF7_VERSION', '4.7' );
 
 define( 'WPCF7_REQUIRED_WP_VERSION', '4.6' );
-=======
-Version: 4.6
-*/
-
-define( 'WPCF7_VERSION', '4.6' );
-
-define( 'WPCF7_REQUIRED_WP_VERSION', '4.5' );
->>>>>>> c19ca9f4e960d9c090efc8092a7090f8b56fa0ca
 
 define( 'WPCF7_PLUGIN', __FILE__ );
 
