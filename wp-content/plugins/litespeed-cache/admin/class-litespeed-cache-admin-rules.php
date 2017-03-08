@@ -46,7 +46,7 @@ class LiteSpeed_Cache_Admin_Rules
 	private static $RW_BLOCK_START = '<IfModule LiteSpeed>';
 	private static $RW_BLOCK_END = '</IfModule>';
 	private static $RW_WRAPPER = 'PLUGIN - Do not edit the contents of this block!';
-	private static $RW_PLUGIN =  "\nRewriteEngine on\nCacheLookup Public on\n";
+	private static $RW_PREREQ = "\nRewriteEngine on\nCacheLookup Public on\n";
 
 	private static $RW_PATTERN_COND_START = '/RewriteCond\s%{';
 	private static $RW_PATTERN_COND_END = '}\s+([^[\n]*)\s+[[]*/';
@@ -394,9 +394,9 @@ class LiteSpeed_Cache_Admin_Rules
 			return $buf;
 		}
 		elseif (($off_next !== false) && ($off_next < $off_end)) {
-			$buf = LiteSpeed_Cache::build_paragraph(
+			$buf = LiteSpeed_Cache_Admin_Display::build_paragraph(
 				self::$ERR_WRONG_ORDER,
-				sprintf(__('Your .htaccess file is missing a %s.', 'litespeed-cache'),
+				sprintf(__('The .htaccess file is missing a %s.', 'litespeed-cache'),
 					'&lt;/IfModule&gt;'));
 			return $buf;
 		}
@@ -427,7 +427,7 @@ class LiteSpeed_Cache_Admin_Rules
 
 		if ($ret === false) {
 			$buf = self::$RW_BLOCK_START . "\n" . $wrapper_begin
-				. self::$RW_PLUGIN;
+				. self::$RW_PREREQ;
 			$after = $wrapper_end . "\n" . self::$RW_BLOCK_END . "\n" . $content;
 			return NULL;
 		}
@@ -454,7 +454,7 @@ class LiteSpeed_Cache_Admin_Rules
 			return $block;
 		}
 		$buf = substr($content, 0, $off_end) . "\n" . $wrapper_begin
-			. self::$RW_PLUGIN;
+			. self::$RW_PREREQ;
 		$after = $wrapper_end . substr($content, $off_end);
 		$rules = array();
 		$matched = preg_replace_callback(self::$RW_PATTERN_WRAPPERS,
@@ -996,7 +996,7 @@ class LiteSpeed_Cache_Admin_Rules
 	 * Ends with |
 	 * Double |
 	 * Unescaped space
-	 * Invalid character (NOT \w, -, \, |, \s, /)
+	 * Invalid character (NOT \w, -, \, |, \s, /, ., +, *, (, ))
 	 *
 	 * @since 1.0.9
 	 * @access private
@@ -1005,8 +1005,8 @@ class LiteSpeed_Cache_Admin_Rules
 	 */
 	private static function check_rewrite($rule)
 	{
-		return (preg_match('/(^\|)|(\|$)|([^\\\\]\s|[^\w-\\\|\s\/]|\|\|)/',
-				$rule) === 0);
+		$escaped = str_replace('@', '\@', $rule);
+		return (@preg_match('@' . $escaped . '@', null) !== false);
 	}
 
 	/**
@@ -1056,7 +1056,12 @@ class LiteSpeed_Cache_Admin_Rules
 			if ($diff[$login_id] !== '') {
 				$match = '.?';
 				$sub = '-';
-				$env = 'E=Cache-Vary:' . $diff[$login_id];
+				if (is_openlitespeed()) {
+					$env = 'E="Cache-Vary:' . $diff[$login_id] . '"';
+				}
+				else {
+					$env = 'E=Cache-Vary:' . $diff[$login_id];
+				}
 			}
 			else {
 				$match = '';
@@ -1082,12 +1087,14 @@ class LiteSpeed_Cache_Admin_Rules
 
 		$path = self::get_site_path();
 		$content2 = '';
+		$before2 = '';
+		$rule_buf2 = "\n";
 		if (self::file_get($content2, $path) === false) {
 			$errors[] = $content2;
 			return false;
 		}
 
-		$haystack2 = $this->file_split($content2, $rule_buf2, $after2);
+		$haystack2 = $this->file_split($content2, $before2, $after2);
 		if ($haystack2 === false) {
 			$errors[] = $rule_buf2;
 			return false;
@@ -1105,7 +1112,8 @@ class LiteSpeed_Cache_Admin_Rules
 			}
 		}
 
-		$ret = $this->file_combine($rule_buf2, $haystack2, $after2, $path);
+		$ret = $this->file_combine($before2, $haystack2 . $rule_buf2,
+			$after2, $path);
 		if ($ret !== true) {
 			$errors[] = self::$ERR_FILESAVE;
 			return false;
@@ -1284,7 +1292,8 @@ class LiteSpeed_Cache_Admin_Rules
 	public function validate_common_rewrites($diff, &$errors)
 	{
 		$content = '';
-		$buf = '';
+		$buf = "\n";
+		$before = '';
 		$after = '';
 
 		if (self::file_get($content) === false) {
@@ -1292,10 +1301,25 @@ class LiteSpeed_Cache_Admin_Rules
 			return false;
 		}
 
-		$haystack = $this->file_split($content, $buf, $after);
+		$haystack = $this->file_split($content, $before, $after);
 		if ($haystack === false) {
 			$errors[] = $buf;
 			return false;
+		}
+
+		if (is_openlitespeed()) {
+			$id = LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE;
+			if ($diff[$id]) {
+				$diff[$id] .= ',wp-postpass_' . COOKIEHASH;
+			}
+			else {
+				$diff[$id] = 'wp-postpass_' . COOKIEHASH;
+			}
+
+			$tp_cookies = apply_filters('litespeed_cache_get_vary', array());
+			if ((!empty($tp_cookies)) && (is_array($tp_cookies))) {
+				$diff[$id] .= ',' . implode(',', $tp_cookies);
+			}
 		}
 
 		$id = LiteSpeed_Cache_Config::ID_MOBILEVIEW_LIST;
@@ -1345,7 +1369,7 @@ class LiteSpeed_Cache_Admin_Rules
 
 		}
 
-		$ret = $this->file_combine($buf, $haystack, $after);
+		$ret = $this->file_combine($before, $haystack . $buf, $after);
 		if ($ret !== true) {
 			$errors[] = self::$ERR_FILESAVE;
 			return false;
@@ -1457,7 +1481,8 @@ class LiteSpeed_Cache_Admin_Rules
 		self::$ERR_NO_LIST = __('Invalid Rewrite List. Empty or invalid rule. Rule: %s', 'litespeed-cache');
 		self::$ERR_NOT_FOUND = __('Could not find %s.', 'litespeed-cache');
 		self::$ERR_OVERWRITE = __('Failed to overwrite %s.', 'litespeed-cache');
-		self::$ERR_PARSE_FILE = LiteSpeed_Cache::build_paragraph(
+		self::$ERR_PARSE_FILE =
+			LiteSpeed_Cache_Admin_Display::build_paragraph(
 			__('Tried to parse for existing login cookie.', 'litespeed-cache'),
 			sprintf(__('%s file not valid. Please verify contents.',
 						'litespeed-cache'), '.htaccess')
@@ -1465,7 +1490,7 @@ class LiteSpeed_Cache_Admin_Rules
 		self::$ERR_READWRITE = sprintf(__('%s file not readable or not writable.', 'litespeed-cache'),
 			'.htaccess');
 		self::$ERR_SUBDIR_MISMATCH_LOGIN =
-			LiteSpeed_Cache::build_paragraph(
+			LiteSpeed_Cache_Admin_Display::build_paragraph(
 			__('This site is a subdirectory install.', 'litespeed-cache'),
 			__('Login cookies do not match.', 'litespeed-cache'),
 			__('Please remove both and set the login cookie in LiteSpeed Cache advanced settings.',

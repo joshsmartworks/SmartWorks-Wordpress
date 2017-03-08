@@ -5,7 +5,7 @@ Plugin URI: http://web-settler.com/maintenance-mode/?ref=wpOrg
 Description: Adds a responsive maintenance mode page to your site that lets visitors know your site is down.
 Author: Muneeb
 Author URI: http://web-settler.com/maintenance-mode/?ref=authoruri
-Version: 3.7.2
+Version: 3.7.3
 Copyright: 2016 Muneeb ur Rehman http://muneeb.me/contact/
 **/
 

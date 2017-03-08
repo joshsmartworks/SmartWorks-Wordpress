@@ -29,6 +29,8 @@ class LiteSpeed_Cache_ThirdParty_Aelia_CurrencySwitcher
 			&& (is_object($GLOBALS['woocommerce-aelia-currencyswitcher']))) {
 			add_filter('litespeed_cache_is_cacheable',
 				'LiteSpeed_Cache_ThirdParty_Aelia_CurrencySwitcher::check_cookies');
+			add_filter('litespeed_cache_get_vary',
+				'LiteSpeed_Cache_ThirdParty_Aelia_CurrencySwitcher::get_vary');
 		}
 	}
 
@@ -71,6 +73,31 @@ class LiteSpeed_Cache_ThirdParty_Aelia_CurrencySwitcher
 		}
 
 		return false;
+	}
+
+	/**
+	 * Hooked to the litespeed_cache_get_vary filter.
+	 *
+	 * If Aelia Currency Switcher is enabled, will need to add their cookies
+	 * to the vary array.
+	 *
+	 * @since 1.0.14
+	 * @access public
+	 * @param array $vary_arr The current list of vary cookies.
+	 * @return array The updated list of vary cookies.
+	 */
+	public static function get_vary($vary_arr)
+	{
+		$cookies = array(
+			'aelia_cs_selected_currency',
+			'aelia_customer_country',
+			'aelia_customer_state',
+			'aelia_tax_exempt',
+		);
+		if (!is_array($vary_arr)) {
+			return $vary_arr;
+		}
+		return array_merge($vary_arr, $cookies);
 	}
 }
 

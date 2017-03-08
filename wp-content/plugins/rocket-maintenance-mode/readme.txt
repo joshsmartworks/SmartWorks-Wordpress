@@ -3,7 +3,7 @@ Contributors: Muneeb
 Donate link: http://web-settler.com/maintenance-mode/
 Tags: coming soon, coming soon page, construction, landing page, launch, launch page, maintenance, maintenance mode, newsletter, offline, site offline, unavailable, under construction, underconstruction, wordpress maintenance mode, wordpress under construction,theme,site is offline,countdown
 Requires at least: 3.1
-Tested up to: 4.6
+Tested up to: 4.7
 Stable tag: 3.2
 License: GPLv2 or later
 

@@ -22,7 +22,7 @@ class LiteSpeed_Cache
 	private static $log_path = '';
 
 	const PLUGIN_NAME = 'litespeed-cache' ;
-	const PLUGIN_VERSION = '1.0.13.1' ;
+	const PLUGIN_VERSION = '1.0.14.1' ;
 
 	const LSCOOKIE_VARY_NAME = 'LSCACHE_VARY_COOKIE' ;
 	const LSCOOKIE_DEFAULT_VARY = '_lscache_vary' ;
@@ -53,6 +53,7 @@ class LiteSpeed_Cache
 	protected $current_vary;
 	protected $cachectrl = self::CACHECTRL_NOCACHE;
 	protected $pub_purge_tags = array();
+	protected $error_status = false;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -204,37 +205,31 @@ class LiteSpeed_Cache
 	 */
 	private static function log_request()
 	{
+		$SERVERVARS = array(
+			'Query String' => '',
+			'HTTP_USER_AGENT' => '',
+			'HTTP_ACCEPT_ENCODING' => '',
+			'HTTP_COOKIE' => '',
+			'X-LSCACHE' => '',
+			'LSCACHE_VARY_COOKIE' => '',
+			'LSCACHE_VARY_VALUE' => ''
+		);
+		$SERVER = array_merge($SERVERVARS, $_SERVER);
 		$params = array(
-			sprintf('%s %s %s', $_SERVER['REQUEST_METHOD'],
-				$_SERVER['SERVER_PROTOCOL'],
-				strtok($_SERVER['REQUEST_URI'], '?')),
-			'Query String: '		. $_SERVER['QUERY_STRING'],
-			'User Agent: '			. $_SERVER['HTTP_USER_AGENT'],
-			'Accept Encoding: '		. $_SERVER['HTTP_ACCEPT_ENCODING'],
-			'Cookie: '				. $_SERVER['HTTP_COOKIE'],
-			'X-LSCACHE: '			. ($_SERVER['X-LSCACHE'] ? 'true' : 'false'),
-			'LSCACHE_VARY_COOKIE: ' . $_SERVER['LSCACHE_VARY_COOKIE'],
-			'LSCACHE_VARY_VALUE: '	. $_SERVER['LSCACHE_VARY_VALUE'],
+			sprintf('%s %s %s', $SERVER['REQUEST_METHOD'],
+				$SERVER['SERVER_PROTOCOL'],
+				strtok($SERVER['REQUEST_URI'], '?')),
+			'Query String: '		. $SERVER['QUERY_STRING'],
+			'User Agent: '			. $SERVER['HTTP_USER_AGENT'],
+			'Accept Encoding: '		. $SERVER['HTTP_ACCEPT_ENCODING'],
+			'Cookie: '				. $SERVER['HTTP_COOKIE'],
+			'X-LSCACHE: '			. ($SERVER['X-LSCACHE'] ? 'true' : 'false'),
+			'LSCACHE_VARY_COOKIE: ' . $SERVER['LSCACHE_VARY_COOKIE'],
+			'LSCACHE_VARY_VALUE: '	. $SERVER['LSCACHE_VARY_VALUE'],
 		);
 
 		$request = array_map('self::format_message', $params);
 		file_put_contents(self::$log_path, $request, FILE_APPEND);
-	}
-
-	/**
-	 * Helper function to build paragraphs out of all the string sentences
-	 * passed in.
-	 *
-	 * @since 1.0.11
-	 * @access public
-	 * @param string $args,... Variable number of strings to combine to a paragraph.
-	 * @return string The built paragraph.
-	 */
-	public static function build_paragraph()
-	{
-		$args = func_get_args();
-		$para = implode(' ', $args);
-		return $para;
 	}
 
 	/**
@@ -257,6 +252,7 @@ class LiteSpeed_Cache
 		LiteSpeed_Cache_Config::wp_cache_var_setter(true);
 
 		include_once $this->plugin_dir . '/admin/class-litespeed-cache-admin.php';
+		require_once $this->plugin_dir . '/admin/class-litespeed-cache-admin-display.php';
 		require_once $this->plugin_dir . '/admin/class-litespeed-cache-admin-rules.php';
 		if (is_multisite()) {
 			$count = $this->get_network_count();
@@ -266,6 +262,7 @@ class LiteSpeed_Cache
 					DAY_IN_SECONDS);
 			}
 		}
+		do_action('litespeed_cache_detect_thirdparty');
 		$this->config->plugin_activation($count);
 		self::generate_environment_report();
 
@@ -375,6 +372,8 @@ class LiteSpeed_Cache
 	public function register_deactivation()
 	{
 		require_once $this->plugin_dir
+			. '/admin/class-litespeed-cache-admin-display.php';
+		require_once $this->plugin_dir
 			. '/admin/class-litespeed-cache-admin-rules.php';
 		if (!defined('LSCWP_LOG_TAG')) {
 			define('LSCWP_LOG_TAG',
@@ -433,16 +432,17 @@ class LiteSpeed_Cache
 	public function init()
 	{
 		$module_enabled = $this->config->is_plugin_enabled();
+		$is_ajax = (defined('DOING_AJAX') && DOING_AJAX);
 
 		if (defined('LSCWP_LOG')) {
 			self::setup_debug_log();
 		}
 
 		if ( is_admin() ) {
-			$this->load_admin_actions($module_enabled) ;
+			$this->load_admin_actions($module_enabled, $is_ajax);
 		}
 		else {
-			$this->load_nonadmin_actions($module_enabled) ;
+			$this->load_nonadmin_actions($module_enabled);
 		}
 
 		if ((!$module_enabled) || (!defined('LSCACHE_ADV_CACHE'))
@@ -456,13 +456,14 @@ class LiteSpeed_Cache
 //		add_action('init', array($this, 'check_admin_bar'), 0);
 //		$this->add_actions_esi();
 
-		$this->setup_cookies();
+		$bad_cookies = $this->setup_cookies();
 
 		if ( $this->check_esi_page()) {
 			return;
 		}
 
-		if ( $this->check_user_logged_in() || $this->check_cookies() ) {
+		if (($bad_cookies) || ($this->check_user_logged_in())
+			|| ($this->check_cookies())) {
 			$this->load_logged_in_actions() ;
 		}
 		else {
@@ -470,7 +471,7 @@ class LiteSpeed_Cache
 		}
 
 		$this->load_public_actions() ;
-		if (defined('DOING_AJAX') && DOING_AJAX) {
+		if ($is_ajax) {
 			do_action('litespeed_cache_detect_thirdparty');
 		}
 		elseif ((is_admin()) || (is_network_admin())) {
@@ -538,10 +539,13 @@ class LiteSpeed_Cache
 	public static function show_version_error_wp()
 	{
 		echo '<div class="error"><p><strong>'
-		. __('Your WordPress version is too old for the LiteSpeed Cache Plugin.', 'litespeed-cache')
+		. __('The installed WordPress version is too old for the LiteSpeed Cache Plugin.', 'litespeed-cache')
 		. '</strong><br />'
-		. sprintf(wp_kses(__('The LiteSpeed Cache Plugin requires at least WordPress %2$s. Please upgrade or go to <a href="%1$s">active plugins</a> and deactivate the LiteSpeed Cache plugin to hide this message.', 'litespeed-cache'), array( 'a' => array( 'href' => array() ) )), 'plugins.php?plugin_status=active', '3.3')
-		. '</p></div>' ;
+		. sprintf(__('The LiteSpeed Cache Plugin requires at least WordPress %s.', 'litespeed-cache'), '3.3')
+		. ' '
+		. sprintf(wp_kses(__('Please upgrade or go to <a href="%s">active plugins</a> and deactivate the LiteSpeed Cache plugin to hide this message.', 'litespeed-cache'),
+				array( 'a' => array( 'href' => array() ) )), 'plugins.php?plugin_status=active')
+		. '</p></div>';
 	}
 
 	/**
@@ -552,10 +556,15 @@ class LiteSpeed_Cache
 	public static function show_version_error_php()
 	{
 		echo '<div class="error"><p><strong>'
-		. __('Your PHP version is too old for LiteSpeed Cache Plugin.', 'litespeed-cache')
-		. '</strong><br /> '
-		. sprintf(wp_kses(__('LiteSpeed Cache Plugin requires at least PHP %3$s. You are using PHP %2$s, which is out-dated and insecure. Please ask your web host to update your PHP installation or go to <a href="%1$s">active plugins</a> and deactivate LiteSpeed Cache plugin to hide this message.', 'litespeed-cache'), array( 'a' => array( 'href' => array() ) )), esc_url("plugins.php?plugin_status=active"), PHP_VERSION, '5.3')
-		. '</p></div>' ;
+			. __('The installed PHP version is too old for the LiteSpeed Cache Plugin.', 'litespeed-cache')
+			. '</strong><br /> '
+			. sprintf(__('The LiteSpeed Cache Plugin requires at least PHP %s.', 'litespeed-cache'), '5.3')
+			. ' '
+			. sprintf(__('The currently installed version is PHP %s, which is out-dated and insecure.', 'litespeed-cache'), PHP_VERSION)
+			. ' '
+			. sprintf(wp_kses(__('Please upgrade or go to <a href="%s">active plugins</a> and deactivate the LiteSpeed Cache plugin to hide this message.', 'litespeed-cache'),
+					array('a' => array('href' => array()))), 'plugins.php?plugin_status=active')
+			. '</p></div>';
 	}
 
 	/**
@@ -566,8 +575,12 @@ class LiteSpeed_Cache
 	public static function show_wp_cache_var_set_error()
 	{
 		echo '<div class="error"><p><strong>'
-		. sprintf(__('LiteSpeed Cache was unable to write to your wp-config.php file. Please add the following to your wp-config.php file located under your WordPress root directory: define(\'WP_CACHE\', true);', 'litespeed-cache'))
-		. '</p></div>' ;
+		. LiteSpeed_Cache_Admin_Display::build_paragraph(
+			__('LiteSpeed Cache was unable to write to the wp-config.php file.', 'litespeed-cache'),
+			sprintf(__('Please add the following to the wp-config.php file: %s', 'litespeed-cache'),
+				'<br><pre>define(\'WP_CACHE\', true);</pre>')
+		)
+		. '</p></div>';
 	}
 
 	/**
@@ -591,8 +604,9 @@ class LiteSpeed_Cache
 	 * @since    1.0.0
 	 * @access   private
 	 * @param boolean $module_enabled Whether the module is enabled or not.
+	 * @param boolean $is_ajax Whether the request is an ajax request or not.
 	 */
-	private function load_admin_actions( $module_enabled )
+	private function load_admin_actions( $module_enabled, $is_ajax )
 	{
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -602,6 +616,14 @@ class LiteSpeed_Cache
 		require_once $this->plugin_dir . 'admin/class-litespeed-cache-admin-rules.php' ;
 
 		$admin = new LiteSpeed_Cache_Admin(self::PLUGIN_NAME, self::PLUGIN_VERSION) ;
+		if ((is_multisite()) && (is_network_admin())) {
+			$action = 'network_admin_notices';
+			$manage = 'manage_network_options';
+		}
+		else {
+			$action = 'admin_notices';
+			$manage = 'manage_options';
+		}
 
 		//register purge_all actions
 		if ( $module_enabled ) {
@@ -622,26 +644,31 @@ class LiteSpeed_Cache
 					array($admin, 'unset_update_text'), 20);
 
 			}
-			add_action('admin_init', array($this, 'check_admin_ip'), 6);
+			if ($is_ajax) {
+				add_action('wp_ajax_lscache_cli', array($this, 'check_admin_ip'));
+				add_action('wp_ajax_nopriv_lscache_cli',
+					array($this, 'check_admin_ip'));
+				add_action('wp_ajax_lscache_dismiss_whm', array($this, 'check_admin_ip'));
+				add_action('wp_ajax_nopriv_lscache_dismiss_whm',
+					array($this, 'check_admin_ip'));
+			}
+			else {
+				add_action('admin_init', array($this, 'check_admin_ip'), 6);
+			}
 			if ($this->config->get_option(LiteSpeed_Cache_Config::OPID_PURGE_ON_UPGRADE)) {
 				add_action('upgrader_process_complete', array($this, 'purge_all'));
 			}
 
 			//Checks if WP_CACHE is defined and true in the wp-config.php file.
-			if ((current_user_can('manage_options'))
-				&& ((!defined('WP_CACHE')) || (constant('WP_CACHE') == false))) {
+			if (current_user_can($manage)) {
+				add_action('wp_before_admin_bar_render',
+					array($admin, 'add_quick_purge'));
 
-				if ((is_multisite()) && (is_network_admin())) {
-					$action = 'network_admin_notices';
+				if (((!defined('WP_CACHE')) || (constant('WP_CACHE') == false))
+				&& (!LiteSpeed_Cache_Config::wp_cache_var_setter(true))) {
+					add_action($action, 'LiteSpeed_Cache::show_wp_cache_var_set_error');
 				}
-				else {
-					$action = 'admin_notices';
-				}
-				add_action($action, 'LiteSpeed_Cache::show_wp_cache_var_set_error');
 			}
-
-			add_action('wp_before_admin_bar_render',
-				array($admin, 'add_quick_purge'));
 		}
 
 		add_action('load-litespeed-cache_page_lscache-edit-htaccess',
@@ -695,6 +722,7 @@ class LiteSpeed_Cache
 		// user is not logged in
 		add_action('wp', array( $this, 'check_cacheable' ), 5) ;
 		add_action('login_init', array( $this, 'check_login_cacheable' ), 5) ;
+		add_filter('status_header', array($this, 'check_error_codes'), 10, 2);
 
 		$cache_res = $this->config->get_option(
 			LiteSpeed_Cache_Config::OPID_CACHE_RES);
@@ -743,23 +771,62 @@ class LiteSpeed_Cache
 	/**
 	 * Adds the actions used for setting up cookies on log in/out.
 	 *
+	 * Also checks if the database matches the rewrite rule.
+	 *
 	 * @since 1.0.4
 	 * @access private
+	 * @return boolean True if cookies are bad, false otherwise.
 	 */
 	private function setup_cookies()
 	{
-		$this->current_vary = isset($_SERVER[self::LSCOOKIE_VARY_NAME])
-				? $_SERVER[self::LSCOOKIE_VARY_NAME] : self::LSCOOKIE_DEFAULT_VARY;
-
+		$ret = false;
 		// Set vary cookie for logging in user, unset for logging out.
 		add_action('set_logged_in_cookie', array( $this, 'set_user_cookie'), 10, 5);
 		add_action('clear_auth_cookie', array( $this, 'set_user_cookie'), 10, 5);
 
-		if ( !$this->config->get_option(LiteSpeed_Cache_Config::OPID_CACHE_COMMENTERS)) {
+		if (!$this->config->get_option(LiteSpeed_Cache_Config::OPID_CACHE_COMMENTERS)) {
 			// Set vary cookie for commenter.
 			add_action('set_comment_cookies', array( $this, 'set_comment_cookie'), 10, 2);
 		}
+		if (is_multisite()) {
+			$options = $this->get_config()->get_site_options();
+			if (is_array($options)) {
+				$db_cookie = $options[
+				LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE];
+			}
+		}
+		else {
+			$db_cookie = $this->get_config()
+				->get_option(LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE);
+		}
 
+		if (!isset($_SERVER[self::LSCOOKIE_VARY_NAME])) {
+			if (!empty($db_cookie)) {
+				$ret = true;
+				if (is_multisite() ? is_network_admin() : is_admin()) {
+					LiteSpeed_Cache_Admin_Display::show_error_cookie();
+				}
+			}
+			$this->current_vary = self::LSCOOKIE_DEFAULT_VARY;
+			return $ret;
+		}
+		elseif (empty($db_cookie)) {
+			$this->current_vary = self::LSCOOKIE_DEFAULT_VARY;
+			return $ret;
+		}
+		// beyond this point, need to do more processing.
+		$vary_arr = explode(',', $_SERVER[self::LSCOOKIE_VARY_NAME]);
+
+		if (in_array($db_cookie, $vary_arr)) {
+			$this->current_vary = $db_cookie;
+			return $ret;
+		}
+		elseif ((is_multisite() ? is_network_admin() : is_admin())) {
+			LiteSpeed_Cache_Admin_Display::show_error_cookie();
+		}
+		$ret = true;
+		$this->current_vary = self::LSCOOKIE_DEFAULT_VARY;
+		return $ret;
 	}
 
 	/**
@@ -887,6 +954,30 @@ class LiteSpeed_Cache
 	public function purge_front()
 	{
 		$this->add_purge_tags(LiteSpeed_Cache_Tags::TYPE_FRONTPAGE);
+	}
+
+	/**
+	 * Alerts LiteSpeed Web Server to purge error pages.
+	 *
+	 * @since    1.0.14
+	 * @access   public
+	 */
+	public function purge_errors()
+	{
+		$this->add_purge_tags(LiteSpeed_Cache_Tags::TYPE_ERROR);
+		if (!isset($_POST[LiteSpeed_Cache_Config::OPTION_NAME])) {
+			return;
+		}
+		$input = $_POST[LiteSpeed_Cache_Config::OPTION_NAME];
+		if (isset($input['include_403'])) {
+			$this->add_purge_tags(LiteSpeed_Cache_Tags::TYPE_ERROR . '403');
+		}
+		if (isset($input['include_404'])) {
+			$this->add_purge_tags(LiteSpeed_Cache_Tags::TYPE_ERROR . '404');
+		}
+		if (isset($input['include_500'])) {
+			$this->add_purge_tags(LiteSpeed_Cache_Tags::TYPE_ERROR . '500');
+		}
 	}
 
 	/**
@@ -1098,7 +1189,7 @@ class LiteSpeed_Cache
 	{
 		$post_id = intval($id);
 		// ignore the status we don't care
-		if ( ! in_array(get_post_status($post_id), array( 'publish', 'trash' )) ) {
+		if ( ! in_array(get_post_status($post_id), array( 'publish', 'trash', 'private' )) ) {
 			return ;
 		}
 
@@ -1157,37 +1248,7 @@ class LiteSpeed_Cache
 	 */
 	private function check_user_logged_in()
 	{
-		$err = self::build_paragraph(
-			__('NOTICE: Database login cookie did not match your login cookie.', 'litespeed-cache'),
-			__('If you recently changed the cookie in the settings, please log out and back in again.', 'litespeed-cache'),
-			__("If not, please verify your LiteSpeed Cache setting's Advanced tab.", 'litespeed-cache'));
-		if (is_openlitespeed()) {
-			$err .= ' '
-				. __('If using OpenLiteSpeed, you may need to restart the server for the changes to take effect.', 'litespeed-cache');
-		}
-
-		if (is_multisite()) {
-			$options = $this->get_config()->get_site_options();
-			if (is_array($options)) {
-				$db_cookie = $options[
-					LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE];
-			}
-		}
-		else {
-			$db_cookie = $this->get_config()
-				->get_option(LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE);
-		}
-
-		if (empty($db_cookie)) {
-			$db_cookie = self::LSCOOKIE_DEFAULT_VARY;
-		}
-
-		if (($db_cookie != $this->current_vary)
-			&& ((is_multisite() ? is_network_admin() : is_admin()))) {
-			LiteSpeed_Cache_Admin_Display::get_instance()->add_notice(
-				LiteSpeed_Cache_Admin_Display::NOTICE_YELLOW, $err);
-		}
-		elseif (!is_user_logged_in()) {
+		if (!is_user_logged_in()) {
 			// If the cookie is set, unset it.
 			if ((isset($_COOKIE)) && (isset($_COOKIE[$this->current_vary]))
 				&& (intval($_COOKIE[$this->current_vary])
@@ -1219,36 +1280,6 @@ class LiteSpeed_Cache
 	 */
 	private function check_cookies()
 	{
-		if ($_SERVER["REQUEST_METHOD"] !== 'GET') {
-			return false;
-		}
-
-		if (is_multisite()) {
-			$options = $this->get_config()->get_site_options();
-			if (is_array($options)) {
-				$db_cookie = $options[
-					LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE];
-			}
-		}
-		else {
-			$db_cookie = $this->get_config()
-				->get_option(LiteSpeed_Cache_Config::OPID_LOGIN_COOKIE);
-		}
-
-		if (empty($db_cookie)) {
-			$db_cookie = self::LSCOOKIE_DEFAULT_VARY;
-		}
-		if (($db_cookie != $this->current_vary)
-				&& (isset($_COOKIE[$db_cookie]))) {
-			if (defined('LSCWP_LOG')) {
-				$this->debug_log(self::build_paragraph(
-					__('NOTICE: Database login cookie does not match the cookie used to access the page.', 'litespeed-cache'),
-					__('Please have the admin check the LiteSpeed Cache settings.', 'litespeed-cache'),
-					__('This error may appear if you are logged into another web application.', 'litespeed-cache')
-				));
-			}
-			return true;
-		}
 		if (!$this->config->get_option(LiteSpeed_Cache_Config::OPID_CACHE_COMMENTERS))
 		{
 			// If do not cache commenters, check cookie for commenter value.
@@ -1431,6 +1462,37 @@ class LiteSpeed_Cache
 	}
 
 	/**
+	 * Check if the page returns 403 and 500 errors.
+	 *
+	 * @since 1.0.13.1
+	 * @access public
+	 * @param $header, $code.
+	 * @return $eeror_status.
+	 */
+	public function check_error_codes($header, $code)
+	{
+		$ttl_403 = $this->config->get_option(LiteSpeed_Cache_Config::OPID_403_TTL);
+		$ttl_500 = $this->config->get_option(LiteSpeed_Cache_Config::OPID_500_TTL);
+		if ($code == 403) {
+			if ($ttl_403 <= 30) {
+				LiteSpeed_Cache_Tags::set_noncacheable();
+			}
+			else {
+				$this->error_status = $code;
+			}
+		}
+		elseif ($code >= 500 && $code < 600) {
+			if ($ttl_500 <= 30) {
+				LiteSpeed_Cache_Tags::set_noncacheable();
+			}
+		}
+		elseif ($code > 400) {
+			$this->error_status = $code;
+		}
+		return $this->error_status;
+	}
+
+	/**
 	 * Write a debug message for if a page is not cacheable.
 	 *
 	 * @since 1.0.0
@@ -1552,11 +1614,12 @@ class LiteSpeed_Cache
 		if ((is_admin()) || (is_network_admin())) {
 			if ((empty($_GET)) || (empty($_GET['_wpnonce']))
 				|| ((wp_verify_nonce($_GET[ '_wpnonce' ], 'litespeed-purgeall') === false)
+					&& (wp_verify_nonce($_GET[ '_wpnonce' ], 'litespeed-purgeall-network') === false)
 					&& (wp_verify_nonce($_GET[ '_wpnonce' ], 'litespeed-dismiss') === false))) {
 				return;
 			}
 		}
-		else {
+		elseif (!defined('DOING_AJAX')) {
 			$ips = $this->config->get_option(LiteSpeed_Cache_Config::OPID_ADMIN_IPS);
 
 			if (strpos($ips, $_SERVER['REMOTE_ADDR']) === false) {
@@ -1571,40 +1634,42 @@ class LiteSpeed_Cache
 		if (defined('LSCWP_LOG')) {
 			self::debug_log('LSCWP_CTRL query string action is ' . $action);
 		}
+
 		switch ($action[0]) {
-		case 'P':
-			if ($action == self::ADMINQS_PURGE) {
-				$this->cachectrl = self::CACHECTRL_PURGE;
-			}
-			elseif ($action == self::ADMINQS_PURGESINGLE) {
-				$this->cachectrl = self::CACHECTRL_PURGESINGLE;
-			}
-			elseif ($action == self::ADMINQS_PURGEALL) {
-				$this->cachectrl = self::CACHECTRL_NOCACHE;
-				$this->purge_all();
-			}
-			else {
-				break;
-			}
-			if ((!is_admin()) && (!is_network_admin())) {
-				return;
-			}
-			$this->admin_ctrl_redirect();
-			return;
-		case 'S':
-			if ($action == self::ADMINQS_SHOWHEADERS) {
-				$this->cachectrl |= self::CACHECTRL_SHOWHEADERS;
-				return;
-			}
-			break;
-		case 'D':
-			if ($action == self::ADMINQS_DISMISS) {
-				delete_transient(self::WHM_TRANSIENT);
+			case 'P':
+				if ($action == self::ADMINQS_PURGE) {
+					$this->cachectrl = self::CACHECTRL_PURGE;
+				}
+				elseif ($action == self::ADMINQS_PURGESINGLE) {
+					$this->cachectrl = self::CACHECTRL_PURGESINGLE;
+				}
+				elseif ($action == self::ADMINQS_PURGEALL) {
+					$this->cachectrl = self::CACHECTRL_NOCACHE;
+					$this->purge_all();
+				}
+				else {
+					break;
+				}
+				if (((!is_admin()) && (!is_network_admin()))
+					|| ((defined('DOING_AJAX') && DOING_AJAX))) {
+					return;
+				}
 				$this->admin_ctrl_redirect();
-			}
-			break;
-		default:
-			break;
+				return;
+			case 'S':
+				if ($action == self::ADMINQS_SHOWHEADERS) {
+					$this->cachectrl |= self::CACHECTRL_SHOWHEADERS;
+					return;
+				}
+				break;
+			case 'D':
+				if ($action == self::ADMINQS_DISMISS) {
+					delete_transient(self::WHM_TRANSIENT);
+					$this->admin_ctrl_redirect();
+				}
+				break;
+			default:
+				break;
 		}
 
 		if (defined('LSCWP_LOG')) {
@@ -1650,7 +1715,10 @@ class LiteSpeed_Cache
 		// Would only use multisite and network admin except is_network_admin
 		// is false for ajax calls, which is used by wordpress updates v4.6+
 		elseif ((is_multisite()) && ((is_network_admin())
-			|| ((defined('DOING_AJAX')) && (check_ajax_referer('updates'))))) {
+			|| ((defined('DOING_AJAX'))
+					&& ((check_ajax_referer('updates', false, false))
+						|| (check_ajax_referer('litespeed-purgeall-network',
+							false, false)))))) {
 			$blogs = self::get_network_ids();
 			if (empty($blogs)) {
 				if (defined('LSCWP_LOG')) {
@@ -1860,7 +1928,9 @@ class LiteSpeed_Cache
 		switch ($mode) {
 			case self::CACHECTRL_CACHE:
 				$feed_ttl = $this->config->get_option(LiteSpeed_Cache_Config::OPID_FEED_TTL);
+				$ttl_403 = $this->config->get_option(LiteSpeed_Cache_Config::OPID_403_TTL);
 				$ttl_404 = $this->config->get_option(LiteSpeed_Cache_Config::OPID_404_TTL);
+				$ttl_500 = $this->config->get_option(LiteSpeed_Cache_Config::OPID_500_TTL);
 				if ((LiteSpeed_Cache_Tags::get_use_frontpage_ttl())
 					|| (is_front_page())){
 					$ttl = $this->config->get_option(LiteSpeed_Cache_Config::OPID_FRONT_PAGE_TTL);
@@ -1870,6 +1940,12 @@ class LiteSpeed_Cache
 				}
 				elseif ((is_404()) && ($ttl_404 > 0)) {
 					$ttl = $ttl_404;
+				}
+				elseif ($this->error_status === 403) {
+					$ttl = $ttl_403;
+				}
+				elseif ($this->error_status >= 500) {
+					$ttl = $ttl_500;
 				}
 				else {
 					$ttl = $this->config->get_option(LiteSpeed_Cache_Config::OPID_PUBLIC_TTL) ;
@@ -1949,6 +2025,10 @@ class LiteSpeed_Cache
 			$cache_tags[] = LiteSpeed_Cache_Tags::TYPE_HOME ;
 		}
 
+		if ($this->error_status !== false) {
+			$cache_tags[] = LiteSpeed_Cache_Tags::TYPE_ERROR . $this->error_status;
+		}
+
 		if ( is_archive() ) {
 			//An Archive is a Category, Tag, Author, Date, Custom Post Type or Custom Taxonomy based pages.
 
@@ -2017,6 +2097,8 @@ class LiteSpeed_Cache
 
 		// post
 		$purge_tags[] = LiteSpeed_Cache_Tags::TYPE_POST . $post_id ;
+		$purge_tags[] = LiteSpeed_Cache_Tags::TYPE_URL
+			. self::get_uri_hash(wp_make_link_relative(get_post_permalink($post_id)));
 
 		// for archive of categories|tags|custom tax
 		$post = get_post($post_id) ;
@@ -2147,7 +2229,8 @@ class LiteSpeed_Cache
 		$server_keys = array(
 			'DOCUMENT_ROOT'=>'',
 			'SERVER_SOFTWARE'=>'',
-			'X-LSCACHE'=>''
+			'X-LSCACHE'=>'',
+			'HTTP_X_LSCACHE'=>''
 		);
 		$server_vars = array_intersect_key($server, $server_keys);
 		$buf = self::format_report_section('Server Variables', $server_vars);
@@ -2249,8 +2332,10 @@ class LiteSpeed_Cache
 				foreach ($blogs as $blog_id) {
 					$opts = get_blog_option($blog_id,
 						LiteSpeed_Cache_Config::OPTION_NAME, array());
-					$options['blog ' . $blog_id . ' radio select']
-						= $opts[LiteSpeed_Cache_Config::OPID_ENABLED_RADIO];
+					if (isset($opts[LiteSpeed_Cache_Config::OPID_ENABLED_RADIO])) {
+						$options['blog ' . $blog_id . ' radio select']
+							= $opts[LiteSpeed_Cache_Config::OPID_ENABLED_RADIO];
+					}
 				}
 			}
 		}

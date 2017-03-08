@@ -43,7 +43,9 @@ class LiteSpeed_Cache_Config
 	const OPID_PUBLIC_TTL = 'public_ttl' ;
 	const OPID_FRONT_PAGE_TTL = 'front_page_ttl';
 	const OPID_FEED_TTL = 'feed_ttl';
+	const OPID_403_TTL = '403_ttl';
 	const OPID_404_TTL = '404_ttl';
+	const OPID_500_TTL = '500_ttl';
 	const OPID_NOCACHE_VARS = 'nocache_vars' ;
 	const OPID_NOCACHE_PATH = 'nocache_path' ;
 	const OPID_PURGE_BY_POST = 'purge_by_post' ;
@@ -100,12 +102,29 @@ class LiteSpeed_Cache_Config
 		}
 	}
 
+	/**
+	 * For multisite installations, the single site options need to be updated
+	 * with the network wide options.
+	 *
+	 * @since 1.0.13
+	 * @access private
+	 * @return array The updated options.
+	 */
 	private function construct_multisite_options()
 	{
 		$site_options = get_site_option(self::OPTION_NAME);
-		if ((!$site_options) || (!is_array($site_options))) {
+
+		if (!function_exists('is_plugin_active_for_network') ) {
+			require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+		}
+
+		if ((!$site_options) || (!is_array($site_options))
+			|| (!is_plugin_active_for_network('litespeed-cache/litespeed-cache.php'))) {
 			$options = get_option(self::OPTION_NAME,
 				$this->get_default_options());
+			if ($options[self::OPID_ENABLED_RADIO] == self::OPID_ENABLED_NOTSET) {
+				$options[self::OPID_ENABLED] = true;
+			}
 			return $options;
 		}
 		if ((isset($site_options[self::NETWORK_OPID_USE_PRIMARY]))
@@ -241,7 +260,9 @@ class LiteSpeed_Cache_Config
 			self::OPID_PUBLIC_TTL => 28800,
 			self::OPID_FRONT_PAGE_TTL => 1800,
 			self::OPID_FEED_TTL => 0,
+			self::OPID_403_TTL => 3600,
 			self::OPID_404_TTL => 3600,
+			self::OPID_500_TTL => 3600,
 			self::OPID_NOCACHE_VARS => '',
 			self::OPID_NOCACHE_PATH => '',
 			self::OPID_PURGE_BY_POST => implode('.', $default_purge_options),
@@ -580,7 +601,8 @@ class LiteSpeed_Cache_Config
 	 */
 	public function is_caching_allowed()
 	{
-		if ( isset($_SERVER['X-LSCACHE']) && $_SERVER['X-LSCACHE']) {
+		if (((isset($_SERVER['X-LSCACHE'])) && ($_SERVER['X-LSCACHE'])) //lsws
+			|| (is_webadc())) {
 			return true;
 		}
 		return false;

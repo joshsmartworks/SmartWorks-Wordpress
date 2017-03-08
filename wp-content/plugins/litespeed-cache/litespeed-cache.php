@@ -15,7 +15,7 @@
  * Plugin Name:       LiteSpeed Cache
  * Plugin URI:        https://www.litespeedtech.com/products/litespeed-web-cache/lscwp
  * Description:       WordPress plugin to connect to LSCache on LiteSpeed Web Server.
- * Version:           1.0.13.1
+ * Version:           1.0.14.1
  * Author:            LiteSpeed Technologies
  * Author URI:        https://www.litespeedtech.com
  * License:           GPLv3
@@ -23,7 +23,7 @@
  * Text Domain:       litespeed-cache
  * Domain Path:       /languages
  *
- * Copyright (C) 2015 LiteSpeed Technologies, Inc.
+ * Copyright (C) 2015-2017 LiteSpeed Technologies, Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,11 +50,26 @@ if ( ! defined('WPINC') ) {
  */
 require_once plugin_dir_path(__FILE__) . 'includes/class-litespeed-cache.php' ;
 
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once plugin_dir_path(__FILE__) . 'includes/class-litespeed-cache-config.php';
+	require_once plugin_dir_path(__FILE__) . 'includes/class-litespeed-cache-tags.php';
+	require_once plugin_dir_path(__FILE__) . 'admin/class-litespeed-cache-admin.php';
+	require_once plugin_dir_path(__FILE__) . 'cli/class-litespeed-cache-cli-purge.php';
+}
+
 if (!function_exists('is_openlitespeed')) {
 	function is_openlitespeed()
 	{
 		return ((isset($_SERVER['LSWS_EDITION']))
 				&& (strncmp($_SERVER['LSWS_EDITION'], 'Openlitespeed', 13) == 0));
+	}
+}
+
+if (!function_exists('is_webadc')) {
+	function is_webadc()
+	{
+		return ((isset($_SERVER['HTTP_X_LSCACHE']))
+			&& ($_SERVER['HTTP_X_LSCACHE']));
 	}
 }
 
@@ -94,4 +109,26 @@ if (!function_exists('run_litespeed_cache')) {
 	}
 
 	run_litespeed_cache() ;
+}
+
+if (!function_exists('uninstall_litespeed_cache')) {
+	function uninstall_litespeed_cache()
+	{
+
+		$cur_dir = dirname(__FILE__) ;
+		require_once $cur_dir . '/includes/class-litespeed-cache.php';
+		require_once $cur_dir . '/includes/class-litespeed-cache-config.php';
+		require_once $cur_dir . '/admin/class-litespeed-cache-admin.php';
+		require_once $cur_dir . '/admin/class-litespeed-cache-admin-display.php';
+		require_once $cur_dir . '/admin/class-litespeed-cache-admin-rules.php';
+
+		LiteSpeed_Cache_Admin_Rules::clear_rules();
+		delete_option(LiteSpeed_Cache_Config::OPTION_NAME);
+		if (is_multisite()) {
+			delete_site_option(LiteSpeed_Cache_Config::OPTION_NAME);
+		}
+
+	}
+	register_uninstall_hook(plugin_basename(__FILE__),
+			'uninstall_litespeed_cache');
 }
