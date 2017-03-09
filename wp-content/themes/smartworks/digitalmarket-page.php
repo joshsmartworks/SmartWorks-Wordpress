@@ -1,6 +1,6 @@
 <?php
 /**
-Template Name: Web Design Page
+Template Name: Digital Market Page
  */
 
 if( is_front_page() ){
@@ -14,19 +14,19 @@ if( is_front_page() ){
 <section class="sw-services-content">
 	<div class="col-md-6 services-content-block">
 		<div class="row">
-				<img src="<?php bloginfo('stylesheet_directory'); ?>/assets/images/services/pexels-photo-225502.jpeg" alt="">
+				<img src="<?php bloginfo('stylesheet_directory'); ?>/assets/images/services/pexels-photo-106344.jpeg" alt="">
 		</div>
 	</div>
 	<div class="col-md-6 services-content-block">
 		<div class="row">
-			<h1>Web Design & Development</h1>
+			<h1>Digital Marketing</h1>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora voluptatem assumenda dolore repellat quas sunt commodi.</p>
 			<ul>
-				<li><i class="fa fa-arrow-right"></i> UX / UI Design</li>	
-				<li><i class="fa fa-arrow-right"></i> Custom WordPress Themes</li>	
-				<li><i class="fa fa-arrow-right"></i> E-Commerce</li>	
-				<li><i class="fa fa-arrow-right"></i> RWD (Responsive Web Design)</li>	
-				<li><i class="fa fa-arrow-right"></i> UI Design for SAAS and Mobile Apps</li>	
+				<li><i class="fa fa-arrow-right"></i> Integrated Marketing Campaigns</li>	
+				<li><i class="fa fa-arrow-right"></i> SEO (Search Engine Optimization)</li>	
+				<li><i class="fa fa-arrow-right"></i> SEM (Search Engine Marketing)</li>	
+				<li><i class="fa fa-arrow-right"></i> Landing Page Creation and Optimization</li>	
+				<li><i class="fa fa-arrow-right"></i> Email and SMS Marketing</li>	
 			</ul>
 			<a href="#" class="button button-started">Get Started</a>
 		</div>
@@ -70,8 +70,5 @@ if( is_front_page() ){
 
 
 <?php
+
 get_footer( 'sw' );
-
-
-
-

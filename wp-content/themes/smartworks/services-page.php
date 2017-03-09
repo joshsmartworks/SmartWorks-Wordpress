@@ -27,7 +27,7 @@ if( is_front_page() ){
 					<i class="fa fa-desktop fa-3x"></i>
 					<h2>Website Design & Development</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
+					<a href="http://localhost/smartworksintl/services/web-design-development/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -35,7 +35,7 @@ if( is_front_page() ){
 					<i class="fa fa-snowflake-o fa-3x"></i>
 					<h2>Print Design</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
+					<a href="http://localhost/smartworksintl/services/print-design/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -43,7 +43,7 @@ if( is_front_page() ){
 					<i class="fa fa-envelope-open-o fa-3x"></i>
 					<h2>Digital Marketing</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
-					<a href="#" class="btn btn-default">Learn More</a>
+					<a href="http://localhost/smartworksintl/services/digital-marketing/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>
 		</div>
