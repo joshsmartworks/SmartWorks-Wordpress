@@ -36,9 +36,7 @@
 
 	<header class="top-bar">
 		<nav class="navbar navbar-default navbar-default-block">
-
 			<div class="container-fluid container-block">
-
 				<div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
 			        <span class="sr-only">Toggle navigation</span>
@@ -68,8 +66,8 @@
 		</nav>
 		<div class="hero">
 			<div class="text-center">
-				<h1>It all Starts with Your Stunning Website</h1>
-				<p>Smartworks unites beauty and technology</p>
+				<h1>Work smarter not harder</h1>
+				<p>Smart Works Intl. works hard on your Design, Development, and Marketing needs, so you can get back to business.</p>
 				<a href="#" class="button button-start">Start Now</a><br><br>
 			</div>
 		</div>

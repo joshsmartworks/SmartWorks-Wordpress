@@ -185,6 +185,18 @@
 			$("#myModal").modal('hide').on('hidden.bs.modal');
 		</script>
 
+		<script>
+			$(function(){
+				$(window).bind('scroll', function(){
+					if($(window).scrollTop()){
+						$('.navbar-default-block').addClass('fixed');
+					}else{
+						$('.navbar-default-block').removeClass('fixed');
+					}
+				});
+			});
+		</script>
+
 
 </body>
 </html>

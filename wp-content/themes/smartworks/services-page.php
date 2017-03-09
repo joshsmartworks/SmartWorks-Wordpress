@@ -26,7 +26,7 @@ if( is_front_page() ){
 				<div class="text-center">
 					<i class="fa fa-desktop fa-3x"></i>
 					<h2>Website Design & Development</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
+					<p>From concept to completion, our team of web design and development specialists seemlessly integrate your organizations identity with the latest web technologies into the foundtion of a functional and flourishing business tool. </p>
 					<a href="http://localhost/smartworksintl/services/web-design-development/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>
@@ -34,7 +34,7 @@ if( is_front_page() ){
 				<div class="text-center">
 					<i class="fa fa-snowflake-o fa-3x"></i>
 					<h2>Print Design</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
+					<p>Leave your mark. Stand above the crowd with dynamic visual representation and embody bold branding into packaging, promotional, and advertising assets.</p>
 					<a href="http://localhost/smartworksintl/services/print-design/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>
@@ -42,7 +42,7 @@ if( is_front_page() ){
 				<div class="text-center">
 					<i class="fa fa-envelope-open-o fa-3x"></i>
 					<h2>Digital Marketing</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis voluptas, quae itaque, labore omnis atque ab ad a adipisci voluptatem explicabo nesciunt nam blanditiis quisquam nisi rerum illum esse repellat.</p>
+					<p>Identify, target, and impress your audience through creative and comprehensive marketing campaigns, built to ignite excitement and return results.</p>
 					<a href="http://localhost/smartworksintl/services/digital-marketing/" class="btn btn-default">Learn More</a>
 				</div>
 			</div>

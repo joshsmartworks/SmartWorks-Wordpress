@@ -377,6 +377,7 @@ html, body {
 	background-color: #fff;
 }
 
+
 .navbar-default .navbar-toggle {
     border-color: rgba(221, 221, 221, 0);
 }
@@ -389,9 +390,33 @@ html, body {
     outline: 0;
 }
 
+.navbar-default-block-sw {
+    position: fixed;
+    height: 80px;
+    background-color: #f7f7f7 !important;
+    border-bottom: 1px solid #e3e3e3 !important;
+    width: 100%;
+    z-index: 99;
+    top: 30px;
+    border-radius: 0;
+}
+
+
+
 /* ========================================================================
  * Header 
  * ======================================================================== */
+
+.fixed {
+	position: fixed;
+	top: 30px;
+	height: 80px;
+	background-color: #f7f7f7 !important;
+	border-bottom: 1px solid #e3e3e3 !important;
+	z-index: 99;
+	border-radius: 0;
+	width: 100%;
+}
 
 .navbar-default {
 	height: 80px;
@@ -444,6 +469,11 @@ li#menu-item-27 a:hover {
 
 .navbar-brand img {
 	width: 220px;
+}
+
+#navbar {
+	position: relative;
+	z-index: 1;
 }
 
 .top-bar {
@@ -805,7 +835,7 @@ footer {
 	background-position: top left;
 	background-repeat: no-repeat;
 	height: 85vh;
-	margin-top: -25px;
+	margin-top: 78px;
 	margin-bottom: 80px;
 }
 
@@ -829,6 +859,7 @@ footer {
 .hero-contact {
 	background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../smartworks/assets/images/contacts/man-people.jpg');
 	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+
 
 }
 
@@ -878,6 +909,8 @@ footer {
  .hero-services {
 	background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../smartworks/assets/images/services/photo-296115.jpeg');
 	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
+
 
  }
 
@@ -939,9 +972,10 @@ footer {
  /* Web Design */
 
 .sw-services-content {
-	margin-top: -25px;
-	clear: both;
+	margin-top: 78px;
+
 }
+
 
 .sw-services-content::after {
 	content: '';
@@ -956,6 +990,8 @@ footer {
 .services-content-block img {
 	width: 100%;
 	height: 85vh;
+	position: relative;
+	z-index: 0;
 }
 
 .services-content-block:nth-child(2) {
@@ -1067,6 +1103,7 @@ footer {
 	background-repeat: no-repeat;
 	height: 85vh;
 	margin-top: -25px;
+	margin-top: 78px;
 	margin-bottom: 80px;
 	box-shadow: 1px 1px 23px 0 rgba(0,0,0,.6);
 

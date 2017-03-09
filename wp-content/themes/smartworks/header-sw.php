@@ -33,8 +33,8 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'smartworks' ); ?></a>
 
-	<header class="top-header">
-		<nav class="navbar navbar-default navbar-default-block">
+	<header class="top-header-pages">
+		<nav class="navbar navbar-default navbar-default-block-sw">
 			<div class="container-fluid container-block">
 				<div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">

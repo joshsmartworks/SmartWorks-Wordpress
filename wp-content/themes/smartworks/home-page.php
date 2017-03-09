@@ -21,8 +21,7 @@ if( is_front_page() ){
 						</div>
 						<div class="col-sm-6 col-sm-pull-6">
 							<h2>Development</h2>
-							<p>While other similar products offer a few features that you can really consider useful, Smartworks is always develop one step ahead of competitors. Find out why you should use Smartworks for your startup development.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo nobis suscipit provident minima itaque soluta rerum enim repellendus repudiandae sint dolorum iure laboriosam atque error neque, aliquid, expedita alias tempora.</p>
+							<p>Create stunning and responsive technologies across website, mobile, e-commerce, and social media platforms. With the capacity to dedicate full time professionals to your project, Smart Works Intl. develops cutting edge and user friendly online experiences to maximize your presence and potential everywhere your clients and customers choose to connec</p>
 							<a href="#" class="button button-learn">Learn More</a>
 						</div>
 					</div>
@@ -34,8 +33,7 @@ if( is_front_page() ){
 						</div>
 						<div class="col-sm-6">
 							<h2>Design</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis temporibus nam velit non adipisci cupiditate consequatur quae tenetur, nulla maxime debitis ea, labore autem, accusantium obcaecati, saepe facilis assumenda voluptatem.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque dolor dolorem, inventore cupiditate fuga natus ut consectetur nam! Excepturi esse sequi praesentium et eos consequuntur accusamus perferendis fugiat, debitis cum?</p>
+							<p>Transform your vision into an effective business tool. Leave a lasting impression in digital and print media through impactful design, personalized to your organizations unique style and purpose. Our team of dedicated graphic design and branding specialists work with you to solve and streamline your print, packaging, advertising, web, and mobile design needs</p>
 							<a href="#" class="button button-learn">Learn More</a>
 						</div>
 					</div>
@@ -46,8 +44,7 @@ if( is_front_page() ){
 					<div class="row">
 						<div class="col-sm-6">
 							<h2>Marketing</h2>
-							<h4>We Help you Grow</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eaque voluptas repudiandae impedit consequatur corporis qui doloremque quasi officia, dignissimos officiis deleniti illo est, numquam ut molestiae. Perferendis distinctio, adipisci.</p>
+							<p>Engage and excite your target audience with impactful dialogue while effectively reach new markets. Increase visibility and sales with a comprehensive marketing strategy that integrates Press, Social Media, and SEO driven content, turning meaningful conversation into conversions</p>
 							<a href="#" class="button button-market">Try Now</a>
 						</div>
 						<div class="col-sm-6 text-center hidden-xs">
@@ -63,7 +60,7 @@ if( is_front_page() ){
 		<div class="container">
 			<div class="row">
 				<h2 class="text-center">Portfolio</h2>
-				<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus possimus, dolores inventore incidunt saepe dicta facere, non temporibus quos ea! Deserunt earum, saepe fugiat placeat excepturi alias laboriosam, et quis!</p>
+				<p class="text-center">“Partnerships with dedicated passion”</p>
 			</div>
 		</div>
         <div class="large-12 columns">
@@ -98,7 +95,7 @@ if( is_front_page() ){
 				<div class="col-md-10 col-md-offset-1">
 					<div class="text-center">
 						<h2>Over 100 Clients Served World Wide</h2>
-						<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+						<h4>Connecting clients and customers across the globe.</h4>
 						<img class="img-responsive" src="<?php bloginfo('stylesheet_directory'); ?>/assets/images/6409-1.jpg" alt="">
 					</div>
 				</div>
