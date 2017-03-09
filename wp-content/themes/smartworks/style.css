@@ -397,7 +397,7 @@ html, body {
     border-bottom: 1px solid #e3e3e3 !important;
     width: 100%;
     z-index: 99;
-    top: 30px;
+    top: 0;
     border-radius: 0;
 }
 
@@ -409,7 +409,7 @@ html, body {
 
 .fixed {
 	position: fixed;
-	top: 30px;
+	top: 0;
 	height: 80px;
 	background-color: #f7f7f7 !important;
 	border-bottom: 1px solid #e3e3e3 !important;
@@ -834,7 +834,7 @@ footer {
 	background-size: cover;
 	background-position: top left;
 	background-repeat: no-repeat;
-	height: 85vh;
+	height: 88vh;
 	margin-top: 78px;
 	margin-bottom: 80px;
 }
@@ -989,14 +989,14 @@ footer {
 
 .services-content-block img {
 	width: 100%;
-	height: 85vh;
+	height: 88vh;
 	position: relative;
 	z-index: 0;
 }
 
 .services-content-block:nth-child(2) {
 	background-color: #005088;
-	height: 85.2vh;
+	height: 88.2vh;
 }
 
 .services-content-block h1,
@@ -1101,7 +1101,7 @@ footer {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	height: 85vh;
+	height: 88vh;
 	margin-top: -25px;
 	margin-top: 78px;
 	margin-bottom: 80px;

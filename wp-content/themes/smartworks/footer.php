@@ -186,9 +186,12 @@
 		</script>
 
 		<script>
+
+		var num= 80;
+
 			$(function(){
 				$(window).bind('scroll', function(){
-					if($(window).scrollTop()){
+					if($(window).scrollTop() > num){
 						$('.navbar-default-block').addClass('fixed');
 					}else{
 						$('.navbar-default-block').removeClass('fixed');
