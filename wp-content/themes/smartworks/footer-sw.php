@@ -23,17 +23,18 @@
 					<ul>
 						<li><h4>Connect</h4></li>
 						<li><p><i class="fa fa-map" aria-hidden="true"></i> 8605 Santa Monica Blvd CA </p></li>
-						<li><p><i class="fa fa-envelope" aria-hidden="true"></i>info@smartworksintl.com </p></li>
-						<li><p><i class="fa fa-phone" aria-hidden="true"></i>  +1415 555 2671</p></li>
+						<li><p><i class="fa fa-envelope" aria-hidden="true"></i> yannick@smartworksintl.com</p></li>
+						<li><p><i class="fa fa-phone" aria-hidden="true"></i>  424-272-0570</p></li>
 					</ul>
 				</div>
 				<div class="col-sm-4 col-xs-12 sw-footer-box">
 					<ul>
 						<li><h4>Quick Links</h4></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Services</a></li>
-						<li><a href="#">Clients</a></li>
-						<li><a href="#">Connect</a></li>
+						<li><a href="http://localhost/smartworksintl">Home</a></li>
+						<li><a href="http://localhost/smartworksintl/about/">About</a></li>
+						<li><a href="http://localhost/smartworksintl/services/">Services</a></li>
+						<li><a href="http://localhost/smartworksintl/services/"> Clients Connect</a></li>
+						<li><a href="http://localhost/smartworksintl/services/" data-toggle="modal" data-target="#myModal"> Request a Quote</a></li>
 					</ul>
 				</div>
 			</div>
@@ -79,10 +80,10 @@
 					</div>
 					<div class="col-md-3 col-xs-12 footer-block-social">
 						<ul class="list-inline pull-right">
-							<li><a href="#"><i class="fa fa-facebook fa-lg"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus fa-lg"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram fa-lg"></i></a></li>
+							<li><a href="https://www.facebook.com/SmartWorksIntl/" target="_blank"><i class="fa fa-facebook fa-lg"></i></a></li>
+							<li><a href="https://www.twitter.com/smartworksintl" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+							<li><a href="https://plus.google.com/u/0/103618327890944078034" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a></li>
+							<li><a href="https://www.instagram.com/smartworksintl/" target="_blank"><i class="fa fa-instagram fa-lg"></i></a></li>
 						</ul>
 					</div>
 				</div>

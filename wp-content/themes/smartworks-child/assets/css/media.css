@@ -173,6 +173,14 @@
 		margin-bottom: 10px;
 	}
 
+	.hero-about h1 {
+	 	font-size: 2.4em !important;
+	 }
+
+  .sw-about-block-inverse h2 {
+	 	padding-top: 60px !important;
+	 }
+
 	.services-development h2,
 	.services-design h2,
 	.services-marketing h2,
@@ -230,11 +238,17 @@
 	/* Contact Page */
 
 	.hero-contact h1 {
-		font-size: 4.2em !important;
+		font-size: 3.2em !important;
 	}
 
 	.hero-contact p {
 		font-size: 1em !important; 
+	}
+
+	@media screen and (max-width: 640px) {
+		.contacts h2 {
+			font-size: 1.2em !important;
+		}
 	}
 
 
@@ -246,12 +260,17 @@
 		.services-marketing {
 			height: 100vh;
 		}
+
+		.hero-about h1 {
+		 	font-size: 2em !important;
+		 }
 	}
+
 
 	@media screen and (max-width: 480px) {
 
 		.top-bar {
-			height: 60vh;
+			height: 80vh !important;
 			background-position: center top;
 		}
 
@@ -259,6 +278,31 @@
 			font-size: 2em !important;
 			margin-bottom: 20px;
 		}
+
+		.hero-about,
+		.hero-services,
+		.hero-contact {
+			height: 50vh !important;
+		}
+
+		.hero-about h1 {
+			padding-top: 100px !important;
+		 	font-size: 1.4em !important;
+		 }
+
+		 .hero-services h1 {
+		 	font-size: 2em !important;
+		 	padding-top: 100px !important;
+		 }	
+		
+		.sw-about-block-inverse {
+			height: 20vh;
+		}
+
+		 .sw-about-block-inverse h2 {
+		 	padding-top: 60px !important;
+		 }
+		
 
 		.hero p {
 			font-weight: 400;
@@ -316,6 +360,10 @@
 			height: 70vh;
 		}
 
+		.contacts h2 {
+			font-size: 1.3em !important;
+		}
+
 		.services-marketing {
 			height: 70vh;
 		}
@@ -323,6 +371,7 @@
 		.footer-block-social {
 		    width: 75%;
 		}
+
+		
 	}
 
-}

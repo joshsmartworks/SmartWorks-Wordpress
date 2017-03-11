@@ -13,7 +13,7 @@ if( is_front_page() ){
 
 <section class="hero-about">
 	<div class="text-center">
-		<h1>SmartWorks <br />International</h1>
+		<h1>SmartWorks <span>International</span></h1>
 	</div>
 </section>
 
@@ -155,7 +155,7 @@ if( is_front_page() ){
 <section class="sw-services-block-contact">
 	<div class="text-center">
 		<h2>Start growing your Business Online Today</h2>
-		<a href="#" class="btn btn-default btn-lg">Hire Us</a>
+		<a href="mailto:yannick@smartworksintl.com" class="btn btn-default btn-lg">Hire Us</a>
 	</div>
 </section>
 

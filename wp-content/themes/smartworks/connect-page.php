@@ -26,8 +26,8 @@ if( is_front_page() ){
 				<h2>SmartWorks International</h2>
 				<p>8605 Santa Monica Blvd #75714
 					Santa Monica CA, 90069 </p>
-				<p>+1415 555 2671</p>
-				<p>info@smartworksintl.com</p>
+				<a href="mailto:yannick@smartworksintl.com">424-272-0570</a>
+				<a href="mailto:yannick@smartworksintl.com">yannick@smartworksintl.com</a>
 				<h2>Follow Us</h2>
 				<ul class="list-inline">
 					<li><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>

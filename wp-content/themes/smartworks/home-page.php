@@ -108,7 +108,7 @@ if( is_front_page() ){
 			<div class="row">
 			<div class="text-center">
 				<h2>Contact us to take your business to the next level</h2>
-				<a href="#" class="button button-hire">Hire Us</a>
+				<a href="http://localhost/smartworksintl/connect/" class="button button-hire">Hire Us</a>
 			</div>
 			</div>
 		</div>

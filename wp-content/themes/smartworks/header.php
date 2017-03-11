@@ -15,6 +15,7 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="shortcut icon" type="image/png" href="<?php bloginfo('stylesheet_directory'); ?>/assets/images/favicon.ico"/>
 
 
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/assets/css/bootstrap.min.css">
@@ -23,6 +24,7 @@
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/assets/css/owl.carousel.min.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
 <script src="<?php bloginfo('stylesheet_directory'); ?>/assets/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
 
 <?php wp_head(); ?>
  <!--[if lt IE 8]>
